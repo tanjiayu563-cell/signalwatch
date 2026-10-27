@@ -1,0 +1,836 @@
+{
+  "generated_at": "2026-10-27T03:52:31+00:00",
+  "dataset_note": "该数据集是合成回归集，用于发现规则和模型链路退化，不代表真实业务准确率。真实准确率需要使用客户历史事件和人工标注集重新评估。",
+  "overall": {
+    "cases": 15,
+    "relevance_accuracy": 1.0,
+    "risk_accuracy": 0.6667,
+    "alert_precision": 1.0,
+    "alert_recall": 0.5455,
+    "alert_f1": 0.7059,
+    "alert_accuracy": 0.6667,
+    "confusion": {
+      "tp": 6,
+      "fp": 0,
+      "fn": 5,
+      "tn": 4
+    }
+  },
+  "rule_regression": {
+    "cases": 0,
+    "relevance_accuracy": 0.0,
+    "risk_accuracy": 0.0,
+    "alert_precision": 0.0,
+    "alert_recall": 0.0,
+    "alert_f1": 0.0,
+    "alert_accuracy": 0.0,
+    "confusion": {
+      "tp": 0,
+      "fp": 0,
+      "fn": 0,
+      "tn": 0
+    }
+  },
+  "ai_required": {
+    "cases": 3,
+    "relevance_accuracy": 1.0,
+    "risk_accuracy": 0.0,
+    "alert_precision": 0.0,
+    "alert_recall": 0.0,
+    "alert_f1": 0.0,
+    "alert_accuracy": 0.0,
+    "confusion": {
+      "tp": 0,
+      "fp": 0,
+      "fn": 3,
+      "tn": 0
+    }
+  },
+  "by_tag": {
+    "ai_required": {
+      "cases": 3,
+      "relevance_accuracy": 1.0,
+      "risk_accuracy": 0.0,
+      "alert_precision": 0.0,
+      "alert_recall": 0.0,
+      "alert_f1": 0.0,
+      "alert_accuracy": 0.0,
+      "confusion": {
+        "tp": 0,
+        "fp": 0,
+        "fn": 3,
+        "tn": 0
+      }
+    },
+    "business": {
+      "cases": 1,
+      "relevance_accuracy": 1.0,
+      "risk_accuracy": 0.0,
+      "alert_precision": 0.0,
+      "alert_recall": 0.0,
+      "alert_f1": 0.0,
+      "alert_accuracy": 0.0,
+      "confusion": {
+        "tp": 0,
+        "fp": 0,
+        "fn": 1,
+        "tn": 0
+      }
+    },
+    "false_positive_control": {
+      "cases": 1,
+      "relevance_accuracy": 1.0,
+      "risk_accuracy": 1.0,
+      "alert_precision": 0.0,
+      "alert_recall": 0.0,
+      "alert_f1": 0.0,
+      "alert_accuracy": 1.0,
+      "confusion": {
+        "tp": 0,
+        "fp": 0,
+        "fn": 0,
+        "tn": 1
+      }
+    },
+    "holdout": {
+      "cases": 15,
+      "relevance_accuracy": 1.0,
+      "risk_accuracy": 0.6667,
+      "alert_precision": 1.0,
+      "alert_recall": 0.5455,
+      "alert_f1": 0.7059,
+      "alert_accuracy": 0.6667,
+      "confusion": {
+        "tp": 6,
+        "fp": 0,
+        "fn": 5,
+        "tn": 4
+      }
+    },
+    "legal": {
+      "cases": 1,
+      "relevance_accuracy": 1.0,
+      "risk_accuracy": 1.0,
+      "alert_precision": 1.0,
+      "alert_recall": 1.0,
+      "alert_f1": 1.0,
+      "alert_accuracy": 1.0,
+      "confusion": {
+        "tp": 1,
+        "fp": 0,
+        "fn": 0,
+        "tn": 0
+      }
+    },
+    "negative_control": {
+      "cases": 3,
+      "relevance_accuracy": 1.0,
+      "risk_accuracy": 1.0,
+      "alert_precision": 0.0,
+      "alert_recall": 0.0,
+      "alert_f1": 0.0,
+      "alert_accuracy": 1.0,
+      "confusion": {
+        "tp": 0,
+        "fp": 0,
+        "fn": 0,
+        "tn": 3
+      }
+    },
+    "policy": {
+      "cases": 1,
+      "relevance_accuracy": 1.0,
+      "risk_accuracy": 1.0,
+      "alert_precision": 1.0,
+      "alert_recall": 1.0,
+      "alert_f1": 1.0,
+      "alert_accuracy": 1.0,
+      "confusion": {
+        "tp": 1,
+        "fp": 0,
+        "fn": 0,
+        "tn": 0
+      }
+    },
+    "product": {
+      "cases": 1,
+      "relevance_accuracy": 1.0,
+      "risk_accuracy": 1.0,
+      "alert_precision": 1.0,
+      "alert_recall": 1.0,
+      "alert_f1": 1.0,
+      "alert_accuracy": 1.0,
+      "confusion": {
+        "tp": 1,
+        "fp": 0,
+        "fn": 0,
+        "tn": 0
+      }
+    },
+    "reputation": {
+      "cases": 1,
+      "relevance_accuracy": 1.0,
+      "risk_accuracy": 1.0,
+      "alert_precision": 1.0,
+      "alert_recall": 1.0,
+      "alert_f1": 1.0,
+      "alert_accuracy": 1.0,
+      "confusion": {
+        "tp": 1,
+        "fp": 0,
+        "fn": 0,
+        "tn": 0
+      }
+    },
+    "rumor": {
+      "cases": 1,
+      "relevance_accuracy": 1.0,
+      "risk_accuracy": 0.0,
+      "alert_precision": 0.0,
+      "alert_recall": 0.0,
+      "alert_f1": 0.0,
+      "alert_accuracy": 0.0,
+      "confusion": {
+        "tp": 0,
+        "fp": 0,
+        "fn": 1,
+        "tn": 0
+      }
+    },
+    "safety": {
+      "cases": 2,
+      "relevance_accuracy": 1.0,
+      "risk_accuracy": 1.0,
+      "alert_precision": 1.0,
+      "alert_recall": 1.0,
+      "alert_f1": 1.0,
+      "alert_accuracy": 1.0,
+      "confusion": {
+        "tp": 2,
+        "fp": 0,
+        "fn": 0,
+        "tn": 0
+      }
+    }
+  },
+  "failures": [
+    {
+      "case_id": "holdout-supplier-debt",
+      "scenario": "拖欠供应商货款",
+      "tags": [
+        "holdout",
+        "business"
+      ],
+      "expected": {
+        "is_relevant": true,
+        "alert": true,
+        "risk_level": "medium"
+      },
+      "predicted": {
+        "is_relevant": true,
+        "risk_level": "low",
+        "alert": false,
+        "matched_terms": [
+          "品牌C"
+        ],
+        "risk_reasons": []
+      },
+      "relevance_correct": true,
+      "risk_correct": false,
+      "alert_correct": false,
+      "ai_applied": false,
+      "ai": {},
+      "risk_reasons": []
+    },
+    {
+      "case_id": "holdout-layoff-rumor",
+      "scenario": "裁员传闻与客服回应",
+      "tags": [
+        "holdout",
+        "rumor"
+      ],
+      "expected": {
+        "is_relevant": true,
+        "alert": true,
+        "risk_level": "medium"
+      },
+      "predicted": {
+        "is_relevant": true,
+        "risk_level": "low",
+        "alert": false,
+        "matched_terms": [
+          "品牌C"
+        ],
+        "risk_reasons": [
+          "舆情弱信号：回应"
+        ]
+      },
+      "relevance_correct": true,
+      "risk_correct": false,
+      "alert_correct": false,
+      "ai_applied": false,
+      "ai": {},
+      "risk_reasons": [
+        "舆情弱信号：回应"
+      ]
+    },
+    {
+      "case_id": "holdout-aftersale-wait",
+      "scenario": "售后服务体验吐槽",
+      "tags": [
+        "holdout",
+        "ai_required"
+      ],
+      "expected": {
+        "is_relevant": true,
+        "alert": true,
+        "risk_level": "medium"
+      },
+      "predicted": {
+        "is_relevant": true,
+        "risk_level": "low",
+        "alert": false,
+        "matched_terms": [
+          "品牌C"
+        ],
+        "risk_reasons": []
+      },
+      "relevance_correct": true,
+      "risk_correct": false,
+      "alert_correct": false,
+      "ai_applied": false,
+      "ai": {},
+      "risk_reasons": []
+    },
+    {
+      "case_id": "holdout-capital-chain",
+      "scenario": "社群传播资金链断裂",
+      "tags": [
+        "holdout",
+        "ai_required"
+      ],
+      "expected": {
+        "is_relevant": true,
+        "alert": true,
+        "risk_level": "medium"
+      },
+      "predicted": {
+        "is_relevant": true,
+        "risk_level": "low",
+        "alert": false,
+        "matched_terms": [
+          "品牌C"
+        ],
+        "risk_reasons": []
+      },
+      "relevance_correct": true,
+      "risk_correct": false,
+      "alert_correct": false,
+      "ai_applied": false,
+      "ai": {},
+      "risk_reasons": []
+    },
+    {
+      "case_id": "holdout-packaging-copy",
+      "scenario": "包装设计被指抄袭",
+      "tags": [
+        "holdout",
+        "ai_required"
+      ],
+      "expected": {
+        "is_relevant": true,
+        "alert": true,
+        "risk_level": "medium"
+      },
+      "predicted": {
+        "is_relevant": true,
+        "risk_level": "low",
+        "alert": false,
+        "matched_terms": [
+          "品牌C"
+        ],
+        "risk_reasons": [
+          "舆情弱信号：回应"
+        ]
+      },
+      "relevance_correct": true,
+      "risk_correct": false,
+      "alert_correct": false,
+      "ai_applied": false,
+      "ai": {},
+      "risk_reasons": [
+        "舆情弱信号：回应"
+      ]
+    }
+  ],
+  "rows": [
+    {
+      "case_id": "holdout-child-cup-chemical",
+      "scenario": "儿童用品疑似化学安全风险",
+      "tags": [
+        "holdout",
+        "safety"
+      ],
+      "expected": {
+        "is_relevant": true,
+        "alert": true,
+        "risk_level": "medium"
+      },
+      "predicted": {
+        "is_relevant": true,
+        "risk_level": "medium",
+        "alert": true,
+        "matched_terms": [
+          "品牌C"
+        ],
+        "risk_reasons": [
+          "产品与消费者：投诉",
+          "法律与监管：监管",
+          "热榜高位：第 6 位"
+        ]
+      },
+      "relevance_correct": true,
+      "risk_correct": true,
+      "alert_correct": true,
+      "ai_applied": false,
+      "ai": {},
+      "risk_reasons": [
+        "产品与消费者：投诉",
+        "法律与监管：监管",
+        "热榜高位：第 6 位"
+      ]
+    },
+    {
+      "case_id": "holdout-factory-fire",
+      "scenario": "工厂火灾造成受伤",
+      "tags": [
+        "holdout",
+        "safety"
+      ],
+      "expected": {
+        "is_relevant": true,
+        "alert": true,
+        "risk_level": "high"
+      },
+      "predicted": {
+        "is_relevant": true,
+        "risk_level": "high",
+        "alert": true,
+        "matched_terms": [
+          "品牌C"
+        ],
+        "risk_reasons": [
+          "人身与安全：受伤、火灾",
+          "热榜高位：第 3 位"
+        ]
+      },
+      "relevance_correct": true,
+      "risk_correct": true,
+      "alert_correct": true,
+      "ai_applied": false,
+      "ai": {},
+      "risk_reasons": [
+        "人身与安全：受伤、火灾",
+        "热榜高位：第 3 位"
+      ]
+    },
+    {
+      "case_id": "holdout-supplier-debt",
+      "scenario": "拖欠供应商货款",
+      "tags": [
+        "holdout",
+        "business"
+      ],
+      "expected": {
+        "is_relevant": true,
+        "alert": true,
+        "risk_level": "medium"
+      },
+      "predicted": {
+        "is_relevant": true,
+        "risk_level": "low",
+        "alert": false,
+        "matched_terms": [
+          "品牌C"
+        ],
+        "risk_reasons": []
+      },
+      "relevance_correct": true,
+      "risk_correct": false,
+      "alert_correct": false,
+      "ai_applied": false,
+      "ai": {},
+      "risk_reasons": []
+    },
+    {
+      "case_id": "holdout-launch-event",
+      "scenario": "新品发布会预告",
+      "tags": [
+        "holdout",
+        "negative_control"
+      ],
+      "expected": {
+        "is_relevant": true,
+        "alert": false,
+        "risk_level": "low"
+      },
+      "predicted": {
+        "is_relevant": true,
+        "risk_level": "low",
+        "alert": false,
+        "matched_terms": [
+          "品牌C"
+        ],
+        "risk_reasons": []
+      },
+      "relevance_correct": true,
+      "risk_correct": true,
+      "alert_correct": true,
+      "ai_applied": false,
+      "ai": {},
+      "risk_reasons": []
+    },
+    {
+      "case_id": "holdout-competitor-price",
+      "scenario": "竞品降价消息",
+      "tags": [
+        "holdout",
+        "false_positive_control"
+      ],
+      "expected": {
+        "is_relevant": false,
+        "alert": false,
+        "risk_level": "low"
+      },
+      "predicted": {
+        "is_relevant": false,
+        "risk_level": "low",
+        "alert": false,
+        "matched_terms": [],
+        "risk_reasons": []
+      },
+      "relevance_correct": true,
+      "risk_correct": true,
+      "alert_correct": true,
+      "ai_applied": false,
+      "ai": {},
+      "risk_reasons": []
+    },
+    {
+      "case_id": "holdout-child-policy",
+      "scenario": "儿童用品新规高位传播",
+      "tags": [
+        "holdout",
+        "policy"
+      ],
+      "expected": {
+        "is_relevant": true,
+        "alert": true,
+        "risk_level": "medium"
+      },
+      "predicted": {
+        "is_relevant": true,
+        "risk_level": "medium",
+        "alert": true,
+        "matched_terms": [
+          "新规"
+        ],
+        "risk_reasons": [
+          "法律与监管：监管",
+          "政策与宏观：新规",
+          "热榜高位：第 4 位"
+        ]
+      },
+      "relevance_correct": true,
+      "risk_correct": true,
+      "alert_correct": true,
+      "ai_applied": false,
+      "ai": {},
+      "risk_reasons": [
+        "法律与监管：监管",
+        "政策与宏观：新规",
+        "热榜高位：第 4 位"
+      ]
+    },
+    {
+      "case_id": "holdout-layoff-rumor",
+      "scenario": "裁员传闻与客服回应",
+      "tags": [
+        "holdout",
+        "rumor"
+      ],
+      "expected": {
+        "is_relevant": true,
+        "alert": true,
+        "risk_level": "medium"
+      },
+      "predicted": {
+        "is_relevant": true,
+        "risk_level": "low",
+        "alert": false,
+        "matched_terms": [
+          "品牌C"
+        ],
+        "risk_reasons": [
+          "舆情弱信号：回应"
+        ]
+      },
+      "relevance_correct": true,
+      "risk_correct": false,
+      "alert_correct": false,
+      "ai_applied": false,
+      "ai": {},
+      "risk_reasons": [
+        "舆情弱信号：回应"
+      ]
+    },
+    {
+      "case_id": "holdout-chair-investigation",
+      "scenario": "董事长被立案调查",
+      "tags": [
+        "holdout",
+        "legal"
+      ],
+      "expected": {
+        "is_relevant": true,
+        "alert": true,
+        "risk_level": "medium"
+      },
+      "predicted": {
+        "is_relevant": true,
+        "risk_level": "medium",
+        "alert": true,
+        "matched_terms": [
+          "品牌C"
+        ],
+        "risk_reasons": [
+          "法律与监管：调查、立案",
+          "热榜高位：第 9 位"
+        ]
+      },
+      "relevance_correct": true,
+      "risk_correct": true,
+      "alert_correct": true,
+      "ai_applied": false,
+      "ai": {},
+      "risk_reasons": [
+        "法律与监管：调查、立案",
+        "热榜高位：第 9 位"
+      ]
+    },
+    {
+      "case_id": "holdout-recall",
+      "scenario": "儿童水杯召回",
+      "tags": [
+        "holdout",
+        "product"
+      ],
+      "expected": {
+        "is_relevant": true,
+        "alert": true,
+        "risk_level": "medium"
+      },
+      "predicted": {
+        "is_relevant": true,
+        "risk_level": "medium",
+        "alert": true,
+        "matched_terms": [
+          "品牌C"
+        ],
+        "risk_reasons": [
+          "产品与消费者：召回"
+        ]
+      },
+      "relevance_correct": true,
+      "risk_correct": true,
+      "alert_correct": true,
+      "ai_applied": false,
+      "ai": {},
+      "risk_reasons": [
+        "产品与消费者：召回"
+      ]
+    },
+    {
+      "case_id": "holdout-charity",
+      "scenario": "公益捐赠获正面评价",
+      "tags": [
+        "holdout",
+        "negative_control"
+      ],
+      "expected": {
+        "is_relevant": true,
+        "alert": false,
+        "risk_level": "low"
+      },
+      "predicted": {
+        "is_relevant": true,
+        "risk_level": "low",
+        "alert": false,
+        "matched_terms": [
+          "品牌C"
+        ],
+        "risk_reasons": []
+      },
+      "relevance_correct": true,
+      "risk_correct": true,
+      "alert_correct": true,
+      "ai_applied": false,
+      "ai": {},
+      "risk_reasons": []
+    },
+    {
+      "case_id": "holdout-aftersale-wait",
+      "scenario": "售后服务体验吐槽",
+      "tags": [
+        "holdout",
+        "ai_required"
+      ],
+      "expected": {
+        "is_relevant": true,
+        "alert": true,
+        "risk_level": "medium"
+      },
+      "predicted": {
+        "is_relevant": true,
+        "risk_level": "low",
+        "alert": false,
+        "matched_terms": [
+          "品牌C"
+        ],
+        "risk_reasons": []
+      },
+      "relevance_correct": true,
+      "risk_correct": false,
+      "alert_correct": false,
+      "ai_applied": false,
+      "ai": {},
+      "risk_reasons": []
+    },
+    {
+      "case_id": "holdout-capital-chain",
+      "scenario": "社群传播资金链断裂",
+      "tags": [
+        "holdout",
+        "ai_required"
+      ],
+      "expected": {
+        "is_relevant": true,
+        "alert": true,
+        "risk_level": "medium"
+      },
+      "predicted": {
+        "is_relevant": true,
+        "risk_level": "low",
+        "alert": false,
+        "matched_terms": [
+          "品牌C"
+        ],
+        "risk_reasons": []
+      },
+      "relevance_correct": true,
+      "risk_correct": false,
+      "alert_correct": false,
+      "ai_applied": false,
+      "ai": {},
+      "risk_reasons": []
+    },
+    {
+      "case_id": "holdout-product-compare",
+      "scenario": "普通参数对比",
+      "tags": [
+        "holdout",
+        "negative_control"
+      ],
+      "expected": {
+        "is_relevant": true,
+        "alert": false,
+        "risk_level": "low"
+      },
+      "predicted": {
+        "is_relevant": true,
+        "risk_level": "low",
+        "alert": false,
+        "matched_terms": [
+          "品牌C"
+        ],
+        "risk_reasons": []
+      },
+      "relevance_correct": true,
+      "risk_correct": true,
+      "alert_correct": true,
+      "ai_applied": false,
+      "ai": {},
+      "risk_reasons": []
+    },
+    {
+      "case_id": "holdout-packaging-copy",
+      "scenario": "包装设计被指抄袭",
+      "tags": [
+        "holdout",
+        "ai_required"
+      ],
+      "expected": {
+        "is_relevant": true,
+        "alert": true,
+        "risk_level": "medium"
+      },
+      "predicted": {
+        "is_relevant": true,
+        "risk_level": "low",
+        "alert": false,
+        "matched_terms": [
+          "品牌C"
+        ],
+        "risk_reasons": [
+          "舆情弱信号：回应"
+        ]
+      },
+      "relevance_correct": true,
+      "risk_correct": false,
+      "alert_correct": false,
+      "ai_applied": false,
+      "ai": {},
+      "risk_reasons": [
+        "舆情弱信号：回应"
+      ]
+    },
+    {
+      "case_id": "holdout-apology",
+      "scenario": "官方道歉声明高位传播",
+      "tags": [
+        "holdout",
+        "reputation"
+      ],
+      "expected": {
+        "is_relevant": true,
+        "alert": true,
+        "risk_level": "medium"
+      },
+      "predicted": {
+        "is_relevant": true,
+        "risk_level": "medium",
+        "alert": true,
+        "matched_terms": [
+          "品牌C"
+        ],
+        "risk_reasons": [
+          "法律与监管：整改",
+          "舆情弱信号：道歉",
+          "热榜高位：第 8 位"
+        ]
+      },
+      "relevance_correct": true,
+      "risk_correct": true,
+      "alert_correct": true,
+      "ai_applied": false,
+      "ai": {},
+      "risk_reasons": [
+        "法律与监管：整改",
+        "舆情弱信号：道歉",
+        "热榜高位：第 8 位"
+      ]
+    }
+  ],
+  "mode": "规则引擎",
+  "model": ""
+}

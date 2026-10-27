@@ -1,0 +1,25 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.9"
+      - name: Compile
+        run: python -m compileall -q app.py monitor_agent scripts
+      - name: Unit tests
+        run: python -m unittest discover -s tests -v
+      - name: Regression evaluation
+        run: python scripts/evaluate.py --output-dir /tmp/signalwatch-evaluation
+      - name: Upload evaluation report
+        uses: actions/upload-artifact@v4
+        with:
+          name: signalwatch-evaluation
+          path: /tmp/signalwatch-evaluation

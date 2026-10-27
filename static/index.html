@@ -1,0 +1,247 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="公开来源舆情监测与危机预警工作台">
+  <title>SignalWatch · 舆情雷达</title>
+  <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+  <div class="ambient ambient-a"></div>
+  <div class="ambient ambient-b"></div>
+
+  <div class="app-shell">
+    <header class="topbar">
+      <a class="brand" href="/" aria-label="SignalWatch 首页">
+        <span class="brand-mark" aria-hidden="true">
+          <span></span><span></span><span></span>
+        </span>
+        <span class="brand-copy">
+          <strong>SignalWatch</strong>
+          <small>舆情雷达</small>
+        </span>
+      </a>
+
+      <div class="topbar-right">
+        <div class="live-state">
+          <span class="live-dot" id="liveDot"></span>
+          <span id="liveText">连接中</span>
+        </div>
+        <div class="last-scan" id="lastScan">最近扫描：--</div>
+        <button class="button button-primary" id="scanButton" type="button">
+          <span class="button-icon" aria-hidden="true">↻</span>
+          <span>立即扫描</span>
+        </button>
+      </div>
+    </header>
+
+    <main>
+      <section class="hero">
+        <div class="hero-copy">
+          <div class="eyebrow"><span></span> PUBLIC SIGNAL INTELLIGENCE</div>
+          <h1>把热榜噪声，<br><em>变成可处置的舆情事件。</em></h1>
+          <p>聚合微博、抖音、今日头条、B站与权威新闻公开信号，完成关键词命中、风险分级、事件聚合和证据留痕。未覆盖的数据源不会被伪装成“全网无风险”。</p>
+        </div>
+        <div class="hero-orbit" aria-hidden="true">
+          <div class="orbit orbit-one"></div>
+          <div class="orbit orbit-two"></div>
+          <div class="orbit-core"><span>LIVE</span></div>
+          <span class="orbit-node node-a"></span>
+          <span class="orbit-node node-b"></span>
+          <span class="orbit-node node-c"></span>
+        </div>
+      </section>
+
+      <section class="stats-grid" aria-label="监测概况">
+        <article class="stat-card">
+          <div class="stat-label">当前信号</div>
+          <strong id="statItems">0</strong>
+          <span>条公开热榜与新闻</span>
+        </article>
+        <article class="stat-card">
+          <div class="stat-label">事件聚合</div>
+          <strong id="statEvents">0</strong>
+          <span>个去重后事件</span>
+        </article>
+        <article class="stat-card stat-alert">
+          <div class="stat-label">命中预警</div>
+          <strong id="statAlerts">0</strong>
+          <span>条需人工关注</span>
+        </article>
+        <article class="stat-card">
+          <div class="stat-label">公开源健康</div>
+          <strong><span id="statSources">0</span><small id="statSourcesTotal">/0</small></strong>
+          <span>本轮成功连接</span>
+        </article>
+      </section>
+
+      <section class="control-panel">
+        <div class="control-heading">
+          <div>
+            <span class="section-kicker">MONITORING SCOPE</span>
+            <h2>设置监测对象</h2>
+          </div>
+          <span class="control-hint">使用逗号分隔多个品牌、人物或事件</span>
+        </div>
+        <form class="watch-form" id="watchForm">
+          <div class="input-wrap">
+            <span class="input-prefix" aria-hidden="true">⌕</span>
+            <input id="watchInput" name="terms" type="text" autocomplete="off" placeholder="例如：比亚迪，食品安全，某品牌代言人">
+          </div>
+          <button class="button button-accent" id="watchButton" type="submit">保存并扫描</button>
+        </form>
+        <div class="quick-row">
+          <span>快速加入</span>
+          <button type="button" class="quick-chip" data-term="比亚迪">比亚迪</button>
+          <button type="button" class="quick-chip" data-term="小米">小米</button>
+          <button type="button" class="quick-chip" data-term="华为">华为</button>
+          <button type="button" class="quick-chip" data-term="食品安全">食品安全</button>
+          <button type="button" class="quick-chip" data-term="政策">政策</button>
+        </div>
+      </section>
+
+      <section class="workspace-grid">
+        <div class="feed-panel">
+          <div class="panel-head">
+            <div class="tabs" role="tablist" aria-label="结果视图">
+              <button class="tab active" id="eventsTab" type="button" role="tab">事件雷达 <span id="tabEventCount">0</span></button>
+              <button class="tab" id="itemsTab" type="button" role="tab">原始信号 <span id="tabItemCount">0</span></button>
+              <button class="tab" id="runsTab" type="button" role="tab">Agent 轨迹 <span id="tabRunCount">0</span></button>
+            </div>
+            <div class="scan-badge" id="scanBadge">等待首次扫描</div>
+          </div>
+
+          <div class="filters">
+            <label class="search-box">
+              <span aria-hidden="true">⌕</span>
+              <input type="search" id="searchFilter" placeholder="筛选当前结果">
+            </label>
+            <select id="riskFilter" aria-label="风险等级">
+              <option value="all">全部风险</option>
+              <option value="high">高风险</option>
+              <option value="medium">中风险</option>
+              <option value="low">低风险</option>
+            </select>
+            <select id="sourceFilter" aria-label="来源筛选">
+              <option value="all">全部来源</option>
+            </select>
+            <label class="toggle-label">
+              <input type="checkbox" id="matchedOnly">
+              <span class="toggle"></span>
+              只看监测命中
+            </label>
+          </div>
+
+          <div class="result-note" id="resultNote"></div>
+          <div class="feed-list" id="feedList" aria-live="polite">
+            <div class="empty-state">
+              <div class="radar-loader"><span></span></div>
+              <h3>正在建立监测基线</h3>
+              <p>公开来源首次扫描完成后，事件会显示在这里。</p>
+            </div>
+          </div>
+        </div>
+
+        <aside class="side-column">
+          <section class="side-panel">
+            <div class="side-head">
+              <div>
+                <span class="section-kicker">SOURCE HEALTH</span>
+                <h2>数据源状态</h2>
+              </div>
+              <span class="mini-status" id="sourceHealthMini">--</span>
+            </div>
+            <div class="source-list" id="sourceList"></div>
+          </section>
+
+          <section class="side-panel ai-panel">
+            <div class="side-head">
+              <div>
+                <span class="section-kicker">MODEL LAYER</span>
+                <h2>AI 研判</h2>
+              </div>
+              <span class="mini-status warn" id="aiStatus">未配置</span>
+            </div>
+            <p class="side-copy" id="aiCopy">当前使用本地规则引擎；配置模型后只分析命中的候选内容，规则结果保留为兜底。</p>
+            <div class="ai-model-line">
+              <span>模型</span>
+              <strong id="aiModelName">未配置</strong>
+            </div>
+            <div class="ai-model-line">
+              <span>告警通道</span>
+              <strong id="notificationChannels">未配置</strong>
+            </div>
+            <div class="ai-error" id="aiError" hidden></div>
+          </section>
+
+          <section class="side-panel auth-panel">
+            <div class="side-head">
+              <div>
+                <span class="section-kicker">AUTHORIZATION</span>
+                <h2>待授权来源</h2>
+              </div>
+              <span class="auth-count" id="authCount">0</span>
+            </div>
+            <p class="side-copy">登录态或授权数据源由你逐项提供。凭据只保存在本机，接口不回传明文；连接器验证通过前不会展示为“已接入”。</p>
+            <div class="auth-list" id="authList"></div>
+          </section>
+
+          <section class="side-panel coverage-panel">
+            <span class="section-kicker">COVERAGE NOTE</span>
+            <h2>覆盖边界</h2>
+            <p id="coverageNote">当前只展示公开来源覆盖范围。</p>
+            <div class="coverage-legend">
+              <span><i class="dot dot-ok"></i>公开可用</span>
+              <span><i class="dot dot-warn"></i>需授权</span>
+              <span><i class="dot dot-bad"></i>连接异常</span>
+            </div>
+          </section>
+        </aside>
+      </section>
+    </main>
+
+    <footer>
+      <span>SignalWatch MVP · 公开数据只用于监测与研究，请遵守平台条款与适用法律。</span>
+      <span id="footerMode">规则引擎 · 单机模式</span>
+    </footer>
+  </div>
+
+  <dialog class="modal auth-modal" id="authModal">
+    <form method="dialog" class="modal-shell" id="authForm">
+      <button class="modal-close" value="cancel" aria-label="关闭" type="submit">×</button>
+      <span class="section-kicker">SOURCE AUTHORIZATION</span>
+      <h2 id="authTitle">来源授权</h2>
+      <p class="modal-copy" id="authDescription"></p>
+      <input type="hidden" id="authSourceId">
+      <label class="field">
+        <span>授权类型</span>
+        <select id="authType"></select>
+      </label>
+      <label class="field">
+        <span>授权凭据</span>
+        <textarea id="authSecret" rows="5" placeholder="粘贴 Session Cookie、API Token 或 API Key" autocomplete="off" spellcheck="false"></textarea>
+      </label>
+      <label class="field" id="endpointField">
+        <span>授权接口地址 <small>可选</small></span>
+        <input id="authEndpoint" type="url" placeholder="https://provider.example/api/search">
+      </label>
+      <div class="security-note">凭据将写入本机 <code>data/credentials.json</code>，文件权限限制为当前用户。生产环境应改为 OAuth 或专用密钥管理服务。</div>
+      <div class="modal-actions">
+        <button class="button button-ghost" id="revokeButton" type="button">撤销授权</button>
+        <button class="button button-primary" id="authSubmit" type="submit">保存授权</button>
+      </div>
+    </form>
+  </dialog>
+
+  <dialog class="modal detail-modal" id="detailModal">
+    <div class="modal-shell detail-shell">
+      <button class="modal-close" id="detailClose" aria-label="关闭" type="button">×</button>
+      <div id="detailContent"></div>
+    </div>
+  </dialog>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <script src="/static/app.js"></script>
+</body>
+</html>

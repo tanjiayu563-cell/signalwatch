@@ -1,0 +1,1013 @@
+{
+  "generated_at": "2026-10-27T03:53:07+00:00",
+  "dataset_note": "该数据集是合成回归集，用于发现规则和模型链路退化，不代表真实业务准确率。真实准确率需要使用客户历史事件和人工标注集重新评估。",
+  "overall": {
+    "cases": 15,
+    "relevance_accuracy": 1.0,
+    "risk_accuracy": 1.0,
+    "alert_precision": 1.0,
+    "alert_recall": 1.0,
+    "alert_f1": 1.0,
+    "alert_accuracy": 1.0,
+    "confusion": {
+      "tp": 11,
+      "fp": 0,
+      "fn": 0,
+      "tn": 4
+    }
+  },
+  "rule_regression": {
+    "cases": 0,
+    "relevance_accuracy": 0.0,
+    "risk_accuracy": 0.0,
+    "alert_precision": 0.0,
+    "alert_recall": 0.0,
+    "alert_f1": 0.0,
+    "alert_accuracy": 0.0,
+    "confusion": {
+      "tp": 0,
+      "fp": 0,
+      "fn": 0,
+      "tn": 0
+    }
+  },
+  "ai_required": {
+    "cases": 3,
+    "relevance_accuracy": 1.0,
+    "risk_accuracy": 1.0,
+    "alert_precision": 1.0,
+    "alert_recall": 1.0,
+    "alert_f1": 1.0,
+    "alert_accuracy": 1.0,
+    "confusion": {
+      "tp": 3,
+      "fp": 0,
+      "fn": 0,
+      "tn": 0
+    }
+  },
+  "by_tag": {
+    "ai_required": {
+      "cases": 3,
+      "relevance_accuracy": 1.0,
+      "risk_accuracy": 1.0,
+      "alert_precision": 1.0,
+      "alert_recall": 1.0,
+      "alert_f1": 1.0,
+      "alert_accuracy": 1.0,
+      "confusion": {
+        "tp": 3,
+        "fp": 0,
+        "fn": 0,
+        "tn": 0
+      }
+    },
+    "business": {
+      "cases": 1,
+      "relevance_accuracy": 1.0,
+      "risk_accuracy": 1.0,
+      "alert_precision": 1.0,
+      "alert_recall": 1.0,
+      "alert_f1": 1.0,
+      "alert_accuracy": 1.0,
+      "confusion": {
+        "tp": 1,
+        "fp": 0,
+        "fn": 0,
+        "tn": 0
+      }
+    },
+    "false_positive_control": {
+      "cases": 1,
+      "relevance_accuracy": 1.0,
+      "risk_accuracy": 1.0,
+      "alert_precision": 0.0,
+      "alert_recall": 0.0,
+      "alert_f1": 0.0,
+      "alert_accuracy": 1.0,
+      "confusion": {
+        "tp": 0,
+        "fp": 0,
+        "fn": 0,
+        "tn": 1
+      }
+    },
+    "holdout": {
+      "cases": 15,
+      "relevance_accuracy": 1.0,
+      "risk_accuracy": 1.0,
+      "alert_precision": 1.0,
+      "alert_recall": 1.0,
+      "alert_f1": 1.0,
+      "alert_accuracy": 1.0,
+      "confusion": {
+        "tp": 11,
+        "fp": 0,
+        "fn": 0,
+        "tn": 4
+      }
+    },
+    "legal": {
+      "cases": 1,
+      "relevance_accuracy": 1.0,
+      "risk_accuracy": 1.0,
+      "alert_precision": 1.0,
+      "alert_recall": 1.0,
+      "alert_f1": 1.0,
+      "alert_accuracy": 1.0,
+      "confusion": {
+        "tp": 1,
+        "fp": 0,
+        "fn": 0,
+        "tn": 0
+      }
+    },
+    "negative_control": {
+      "cases": 3,
+      "relevance_accuracy": 1.0,
+      "risk_accuracy": 1.0,
+      "alert_precision": 0.0,
+      "alert_recall": 0.0,
+      "alert_f1": 0.0,
+      "alert_accuracy": 1.0,
+      "confusion": {
+        "tp": 0,
+        "fp": 0,
+        "fn": 0,
+        "tn": 3
+      }
+    },
+    "policy": {
+      "cases": 1,
+      "relevance_accuracy": 1.0,
+      "risk_accuracy": 1.0,
+      "alert_precision": 1.0,
+      "alert_recall": 1.0,
+      "alert_f1": 1.0,
+      "alert_accuracy": 1.0,
+      "confusion": {
+        "tp": 1,
+        "fp": 0,
+        "fn": 0,
+        "tn": 0
+      }
+    },
+    "product": {
+      "cases": 1,
+      "relevance_accuracy": 1.0,
+      "risk_accuracy": 1.0,
+      "alert_precision": 1.0,
+      "alert_recall": 1.0,
+      "alert_f1": 1.0,
+      "alert_accuracy": 1.0,
+      "confusion": {
+        "tp": 1,
+        "fp": 0,
+        "fn": 0,
+        "tn": 0
+      }
+    },
+    "reputation": {
+      "cases": 1,
+      "relevance_accuracy": 1.0,
+      "risk_accuracy": 1.0,
+      "alert_precision": 1.0,
+      "alert_recall": 1.0,
+      "alert_f1": 1.0,
+      "alert_accuracy": 1.0,
+      "confusion": {
+        "tp": 1,
+        "fp": 0,
+        "fn": 0,
+        "tn": 0
+      }
+    },
+    "rumor": {
+      "cases": 1,
+      "relevance_accuracy": 1.0,
+      "risk_accuracy": 1.0,
+      "alert_precision": 1.0,
+      "alert_recall": 1.0,
+      "alert_f1": 1.0,
+      "alert_accuracy": 1.0,
+      "confusion": {
+        "tp": 1,
+        "fp": 0,
+        "fn": 0,
+        "tn": 0
+      }
+    },
+    "safety": {
+      "cases": 2,
+      "relevance_accuracy": 1.0,
+      "risk_accuracy": 1.0,
+      "alert_precision": 1.0,
+      "alert_recall": 1.0,
+      "alert_f1": 1.0,
+      "alert_accuracy": 1.0,
+      "confusion": {
+        "tp": 2,
+        "fp": 0,
+        "fn": 0,
+        "tn": 0
+      }
+    }
+  },
+  "failures": [],
+  "rows": [
+    {
+      "case_id": "holdout-child-cup-chemical",
+      "scenario": "儿童用品疑似化学安全风险",
+      "tags": [
+        "holdout",
+        "safety"
+      ],
+      "expected": {
+        "is_relevant": true,
+        "alert": true,
+        "risk_level": "medium"
+      },
+      "predicted": {
+        "is_relevant": true,
+        "risk_level": "medium",
+        "alert": true,
+        "matched_terms": [
+          "品牌C"
+        ],
+        "risk_reasons": [
+          "产品与消费者：投诉",
+          "法律与监管：监管",
+          "热榜高位：第 6 位",
+          "AI研判：标题称“品牌C儿童水杯被曝检出塑化剂”",
+          "AI研判：摘要称“家长投诉，监管部门已抽样送检”"
+        ]
+      },
+      "relevance_correct": true,
+      "risk_correct": true,
+      "alert_correct": true,
+      "ai_applied": true,
+      "ai": {
+        "risk_level": "high",
+        "relevance": "direct",
+        "risk_categories": [
+          "产品质量",
+          "健康安全",
+          "监管抽检"
+        ],
+        "risk_reasons": [
+          "标题称“品牌C儿童水杯被曝检出塑化剂”",
+          "摘要称“家长投诉，监管部门已抽样送检”"
+        ],
+        "summary": "品牌C儿童水杯被曝检出塑化剂，家长投诉，监管部门已抽样送检。",
+        "claim_type": "unverified",
+        "verification_questions": [
+          "监管部门抽样送检结果是否已公布？",
+          "涉事水杯的生产批次和型号是什么？",
+          "是否已采取下架、召回或停售措施？"
+        ],
+        "confidence": 0.9
+      },
+      "risk_reasons": [
+        "产品与消费者：投诉",
+        "法律与监管：监管",
+        "热榜高位：第 6 位",
+        "AI研判：标题称“品牌C儿童水杯被曝检出塑化剂”",
+        "AI研判：摘要称“家长投诉，监管部门已抽样送检”"
+      ]
+    },
+    {
+      "case_id": "holdout-factory-fire",
+      "scenario": "工厂火灾造成受伤",
+      "tags": [
+        "holdout",
+        "safety"
+      ],
+      "expected": {
+        "is_relevant": true,
+        "alert": true,
+        "risk_level": "high"
+      },
+      "predicted": {
+        "is_relevant": true,
+        "risk_level": "high",
+        "alert": true,
+        "matched_terms": [
+          "品牌C"
+        ],
+        "risk_reasons": [
+          "人身与安全：受伤、火灾",
+          "热榜高位：第 3 位",
+          "AI研判：标题称“品牌C工厂发生火灾造成两人受伤”",
+          "AI研判：摘要称“消防部门已到场处置”"
+        ]
+      },
+      "relevance_correct": true,
+      "risk_correct": true,
+      "alert_correct": true,
+      "ai_applied": true,
+      "ai": {
+        "risk_level": "high",
+        "relevance": "direct",
+        "risk_categories": [
+          "生产安全",
+          "人员伤亡",
+          "品牌声誉"
+        ],
+        "risk_reasons": [
+          "标题称“品牌C工厂发生火灾造成两人受伤”",
+          "摘要称“消防部门已到场处置”"
+        ],
+        "summary": "品牌C工厂发生火灾，造成两人受伤，消防部门已到场处置。",
+        "claim_type": "fact",
+        "verification_questions": [
+          "火灾原因是否已查明？",
+          "受伤人员情况及工厂停产影响如何？",
+          "是否涉及生产安全整改？"
+        ],
+        "confidence": 0.9
+      },
+      "risk_reasons": [
+        "人身与安全：受伤、火灾",
+        "热榜高位：第 3 位",
+        "AI研判：标题称“品牌C工厂发生火灾造成两人受伤”",
+        "AI研判：摘要称“消防部门已到场处置”"
+      ]
+    },
+    {
+      "case_id": "holdout-supplier-debt",
+      "scenario": "拖欠供应商货款",
+      "tags": [
+        "holdout",
+        "business"
+      ],
+      "expected": {
+        "is_relevant": true,
+        "alert": true,
+        "risk_level": "medium"
+      },
+      "predicted": {
+        "is_relevant": true,
+        "risk_level": "medium",
+        "alert": true,
+        "matched_terms": [
+          "品牌C"
+        ],
+        "risk_reasons": [
+          "AI研判：标题称“多名供应商称品牌C拖欠货款”",
+          "AI研判：摘要称“供应商称回款周期已延长数月”"
+        ]
+      },
+      "relevance_correct": true,
+      "risk_correct": true,
+      "alert_correct": true,
+      "ai_applied": true,
+      "ai": {
+        "risk_level": "medium",
+        "relevance": "direct",
+        "risk_categories": [
+          "供应链",
+          "财务风险",
+          "品牌声誉"
+        ],
+        "risk_reasons": [
+          "标题称“多名供应商称品牌C拖欠货款”",
+          "摘要称“供应商称回款周期已延长数月”"
+        ],
+        "summary": "多名供应商称品牌C拖欠货款，回款周期已延长数月。",
+        "claim_type": "claim",
+        "verification_questions": [
+          "涉及欠款金额和供应商数量是多少？",
+          "品牌C是否已回应？",
+          "是否影响供货和生产经营？"
+        ],
+        "confidence": 0.8
+      },
+      "risk_reasons": [
+        "AI研判：标题称“多名供应商称品牌C拖欠货款”",
+        "AI研判：摘要称“供应商称回款周期已延长数月”"
+      ]
+    },
+    {
+      "case_id": "holdout-launch-event",
+      "scenario": "新品发布会预告",
+      "tags": [
+        "holdout",
+        "negative_control"
+      ],
+      "expected": {
+        "is_relevant": true,
+        "alert": false,
+        "risk_level": "low"
+      },
+      "predicted": {
+        "is_relevant": true,
+        "risk_level": "low",
+        "alert": false,
+        "matched_terms": [
+          "品牌C"
+        ],
+        "risk_reasons": [
+          "AI研判：标题称“品牌C新品发布会定档”",
+          "AI研判：摘要称“官方公布直播时间”"
+        ]
+      },
+      "relevance_correct": true,
+      "risk_correct": true,
+      "alert_correct": true,
+      "ai_applied": true,
+      "ai": {
+        "risk_level": "low",
+        "relevance": "direct",
+        "risk_categories": [],
+        "risk_reasons": [
+          "标题称“品牌C新品发布会定档”",
+          "摘要称“官方公布直播时间”"
+        ],
+        "summary": "品牌C新品发布会定档，官方公布直播时间。",
+        "claim_type": "fact",
+        "verification_questions": [],
+        "confidence": 0.9
+      },
+      "risk_reasons": [
+        "AI研判：标题称“品牌C新品发布会定档”",
+        "AI研判：摘要称“官方公布直播时间”"
+      ]
+    },
+    {
+      "case_id": "holdout-competitor-price",
+      "scenario": "竞品降价消息",
+      "tags": [
+        "holdout",
+        "false_positive_control"
+      ],
+      "expected": {
+        "is_relevant": false,
+        "alert": false,
+        "risk_level": "low"
+      },
+      "predicted": {
+        "is_relevant": false,
+        "risk_level": "low",
+        "alert": false,
+        "matched_terms": [],
+        "risk_reasons": []
+      },
+      "relevance_correct": true,
+      "risk_correct": true,
+      "alert_correct": true,
+      "ai_applied": false,
+      "ai": {},
+      "risk_reasons": []
+    },
+    {
+      "case_id": "holdout-child-policy",
+      "scenario": "儿童用品新规高位传播",
+      "tags": [
+        "holdout",
+        "policy"
+      ],
+      "expected": {
+        "is_relevant": true,
+        "alert": true,
+        "risk_level": "medium"
+      },
+      "predicted": {
+        "is_relevant": true,
+        "risk_level": "medium",
+        "alert": true,
+        "matched_terms": [
+          "新规"
+        ],
+        "risk_reasons": [
+          "法律与监管：监管",
+          "政策与宏观：新规",
+          "热榜高位：第 4 位",
+          "AI研判：标题称“监管部门就儿童用品发布新规”",
+          "AI研判：摘要称“新规将分阶段实施”"
+        ]
+      },
+      "relevance_correct": true,
+      "risk_correct": true,
+      "alert_correct": true,
+      "ai_applied": true,
+      "ai": {
+        "risk_level": "medium",
+        "relevance": "industry",
+        "risk_categories": [
+          "行业监管",
+          "产品合规"
+        ],
+        "risk_reasons": [
+          "标题称“监管部门就儿童用品发布新规”",
+          "摘要称“新规将分阶段实施”"
+        ],
+        "summary": "监管部门就儿童用品发布新规，新规将分阶段实施。",
+        "claim_type": "fact",
+        "verification_questions": [
+          "新规是否覆盖儿童水杯品类？",
+          "分阶段实施的时间表是什么？",
+          "是否影响品牌C在售产品批次？"
+        ],
+        "confidence": 0.85
+      },
+      "risk_reasons": [
+        "法律与监管：监管",
+        "政策与宏观：新规",
+        "热榜高位：第 4 位",
+        "AI研判：标题称“监管部门就儿童用品发布新规”",
+        "AI研判：摘要称“新规将分阶段实施”"
+      ]
+    },
+    {
+      "case_id": "holdout-layoff-rumor",
+      "scenario": "裁员传闻与客服回应",
+      "tags": [
+        "holdout",
+        "rumor"
+      ],
+      "expected": {
+        "is_relevant": true,
+        "alert": true,
+        "risk_level": "medium"
+      },
+      "predicted": {
+        "is_relevant": true,
+        "risk_level": "medium",
+        "alert": true,
+        "matched_terms": [
+          "品牌C"
+        ],
+        "risk_reasons": [
+          "舆情弱信号：回应",
+          "AI研判：标题称“品牌C客服回应大规模裁员传闻”",
+          "AI研判：摘要称“网传多个部门暂停招聘，尚无人力部门公告”"
+        ]
+      },
+      "relevance_correct": true,
+      "risk_correct": true,
+      "alert_correct": true,
+      "ai_applied": true,
+      "ai": {
+        "risk_level": "medium",
+        "relevance": "direct",
+        "risk_categories": [
+          "人事变动",
+          "传闻",
+          "品牌声誉"
+        ],
+        "risk_reasons": [
+          "标题称“品牌C客服回应大规模裁员传闻”",
+          "摘要称“网传多个部门暂停招聘，尚无人力部门公告”"
+        ],
+        "summary": "品牌C客服回应大规模裁员传闻；网传多个部门暂停招聘，尚无人力部门公告。",
+        "claim_type": "unverified",
+        "verification_questions": [
+          "客服回应原文是什么？",
+          "人力部门是否发布公告？",
+          "暂停招聘涉及哪些部门？"
+        ],
+        "confidence": 0.8
+      },
+      "risk_reasons": [
+        "舆情弱信号：回应",
+        "AI研判：标题称“品牌C客服回应大规模裁员传闻”",
+        "AI研判：摘要称“网传多个部门暂停招聘，尚无人力部门公告”"
+      ]
+    },
+    {
+      "case_id": "holdout-chair-investigation",
+      "scenario": "董事长被立案调查",
+      "tags": [
+        "holdout",
+        "legal"
+      ],
+      "expected": {
+        "is_relevant": true,
+        "alert": true,
+        "risk_level": "medium"
+      },
+      "predicted": {
+        "is_relevant": true,
+        "risk_level": "medium",
+        "alert": true,
+        "matched_terms": [
+          "品牌C"
+        ],
+        "risk_reasons": [
+          "法律与监管：调查、立案",
+          "热榜高位：第 9 位",
+          "AI研判：标题称“品牌C董事长被立案调查”",
+          "AI研判：摘要称“公司公告称生产经营正常”"
+        ]
+      },
+      "relevance_correct": true,
+      "risk_correct": true,
+      "alert_correct": true,
+      "ai_applied": true,
+      "ai": {
+        "risk_level": "high",
+        "relevance": "direct",
+        "risk_categories": [
+          "高管法律风险",
+          "公司治理",
+          "品牌声誉"
+        ],
+        "risk_reasons": [
+          "标题称“品牌C董事长被立案调查”",
+          "摘要称“公司公告称生产经营正常”"
+        ],
+        "summary": "品牌C董事长被立案调查，公司公告称生产经营正常。",
+        "claim_type": "fact",
+        "verification_questions": [
+          "立案调查机关和事由是什么？",
+          "是否涉及公司经营事项？",
+          "对公司决策和经营影响如何？"
+        ],
+        "confidence": 0.9
+      },
+      "risk_reasons": [
+        "法律与监管：调查、立案",
+        "热榜高位：第 9 位",
+        "AI研判：标题称“品牌C董事长被立案调查”",
+        "AI研判：摘要称“公司公告称生产经营正常”"
+      ]
+    },
+    {
+      "case_id": "holdout-recall",
+      "scenario": "儿童水杯召回",
+      "tags": [
+        "holdout",
+        "product"
+      ],
+      "expected": {
+        "is_relevant": true,
+        "alert": true,
+        "risk_level": "medium"
+      },
+      "predicted": {
+        "is_relevant": true,
+        "risk_level": "medium",
+        "alert": true,
+        "matched_terms": [
+          "品牌C"
+        ],
+        "risk_reasons": [
+          "产品与消费者：召回",
+          "AI研判：标题称“品牌C宣布召回部分儿童水杯”",
+          "AI研判：摘要称“涉及特定生产批次”"
+        ]
+      },
+      "relevance_correct": true,
+      "risk_correct": true,
+      "alert_correct": true,
+      "ai_applied": true,
+      "ai": {
+        "risk_level": "high",
+        "relevance": "direct",
+        "risk_categories": [
+          "产品质量",
+          "消费者安全",
+          "召回"
+        ],
+        "risk_reasons": [
+          "标题称“品牌C宣布召回部分儿童水杯”",
+          "摘要称“涉及特定生产批次”"
+        ],
+        "summary": "品牌C宣布召回部分儿童水杯，涉及特定生产批次。",
+        "claim_type": "fact",
+        "verification_questions": [
+          "召回批次和数量是多少？",
+          "召回原因是什么？",
+          "是否与塑化剂投诉相关？"
+        ],
+        "confidence": 0.9
+      },
+      "risk_reasons": [
+        "产品与消费者：召回",
+        "AI研判：标题称“品牌C宣布召回部分儿童水杯”",
+        "AI研判：摘要称“涉及特定生产批次”"
+      ]
+    },
+    {
+      "case_id": "holdout-charity",
+      "scenario": "公益捐赠获正面评价",
+      "tags": [
+        "holdout",
+        "negative_control"
+      ],
+      "expected": {
+        "is_relevant": true,
+        "alert": false,
+        "risk_level": "low"
+      },
+      "predicted": {
+        "is_relevant": true,
+        "risk_level": "low",
+        "alert": false,
+        "matched_terms": [
+          "品牌C"
+        ],
+        "risk_reasons": [
+          "AI研判：标题称“品牌C向灾区捐赠物资获好评”",
+          "AI研判：摘要称“网友点赞企业社会责任”"
+        ]
+      },
+      "relevance_correct": true,
+      "risk_correct": true,
+      "alert_correct": true,
+      "ai_applied": true,
+      "ai": {
+        "risk_level": "low",
+        "relevance": "direct",
+        "risk_categories": [
+          "正面信息"
+        ],
+        "risk_reasons": [
+          "标题称“品牌C向灾区捐赠物资获好评”",
+          "摘要称“网友点赞企业社会责任”"
+        ],
+        "summary": "品牌C向灾区捐赠物资获好评，网友点赞企业社会责任。",
+        "claim_type": "fact",
+        "verification_questions": [],
+        "confidence": 0.9
+      },
+      "risk_reasons": [
+        "AI研判：标题称“品牌C向灾区捐赠物资获好评”",
+        "AI研判：摘要称“网友点赞企业社会责任”"
+      ]
+    },
+    {
+      "case_id": "holdout-aftersale-wait",
+      "scenario": "售后服务体验吐槽",
+      "tags": [
+        "holdout",
+        "ai_required"
+      ],
+      "expected": {
+        "is_relevant": true,
+        "alert": true,
+        "risk_level": "medium"
+      },
+      "predicted": {
+        "is_relevant": true,
+        "risk_level": "medium",
+        "alert": true,
+        "matched_terms": [
+          "品牌C"
+        ],
+        "risk_reasons": [
+          "AI研判：标题称“品牌C售后排队两小时还没人处理”",
+          "AI研判：摘要称“用户称连续三次联系客服未解决”"
+        ]
+      },
+      "relevance_correct": true,
+      "risk_correct": true,
+      "alert_correct": true,
+      "ai_applied": true,
+      "ai": {
+        "risk_level": "medium",
+        "relevance": "direct",
+        "risk_categories": [
+          "消费者权益",
+          "售后服务",
+          "品牌声誉"
+        ],
+        "risk_reasons": [
+          "标题称“品牌C售后排队两小时还没人处理”",
+          "摘要称“用户称连续三次联系客服未解决”"
+        ],
+        "summary": "用户称品牌C售后排队两小时无人处理，连续三次联系客服未解决。",
+        "claim_type": "claim",
+        "verification_questions": [
+          "该售后问题是否具有普遍性？",
+          "客服响应时效和解决机制如何？",
+          "用户问题是否已解决？"
+        ],
+        "confidence": 0.75
+      },
+      "risk_reasons": [
+        "AI研判：标题称“品牌C售后排队两小时还没人处理”",
+        "AI研判：摘要称“用户称连续三次联系客服未解决”"
+      ]
+    },
+    {
+      "case_id": "holdout-capital-chain",
+      "scenario": "社群传播资金链断裂",
+      "tags": [
+        "holdout",
+        "ai_required"
+      ],
+      "expected": {
+        "is_relevant": true,
+        "alert": true,
+        "risk_level": "medium"
+      },
+      "predicted": {
+        "is_relevant": true,
+        "risk_level": "medium",
+        "alert": true,
+        "matched_terms": [
+          "品牌C"
+        ],
+        "risk_reasons": [
+          "AI研判：标题称“群里都在传品牌C资金链断了”",
+          "AI研判：摘要称“聊天截图称员工工资延迟，尚无官方来源”"
+        ]
+      },
+      "relevance_correct": true,
+      "risk_correct": true,
+      "alert_correct": true,
+      "ai_applied": true,
+      "ai": {
+        "risk_level": "high",
+        "relevance": "direct",
+        "risk_categories": [
+          "财务风险",
+          "谣言",
+          "品牌声誉"
+        ],
+        "risk_reasons": [
+          "标题称“群里都在传品牌C资金链断了”",
+          "摘要称“聊天截图称员工工资延迟，尚无官方来源”"
+        ],
+        "summary": "群聊传播品牌C资金链断裂，聊天截图称员工工资延迟，尚无官方来源。",
+        "claim_type": "unverified",
+        "verification_questions": [
+          "聊天截图来源和真实性如何？",
+          "员工工资延迟是否有证据？",
+          "品牌C是否已回应？"
+        ],
+        "confidence": 0.85
+      },
+      "risk_reasons": [
+        "AI研判：标题称“群里都在传品牌C资金链断了”",
+        "AI研判：摘要称“聊天截图称员工工资延迟，尚无官方来源”"
+      ]
+    },
+    {
+      "case_id": "holdout-product-compare",
+      "scenario": "普通参数对比",
+      "tags": [
+        "holdout",
+        "negative_control"
+      ],
+      "expected": {
+        "is_relevant": true,
+        "alert": false,
+        "risk_level": "low"
+      },
+      "predicted": {
+        "is_relevant": true,
+        "risk_level": "low",
+        "alert": false,
+        "matched_terms": [
+          "品牌C"
+        ],
+        "risk_reasons": [
+          "AI研判：标题称“品牌C和品牌D旗舰产品参数对比”",
+          "AI研判：摘要称“普通数码产品测评”"
+        ]
+      },
+      "relevance_correct": true,
+      "risk_correct": true,
+      "alert_correct": true,
+      "ai_applied": true,
+      "ai": {
+        "risk_level": "low",
+        "relevance": "direct",
+        "risk_categories": [
+          "竞品对比"
+        ],
+        "risk_reasons": [
+          "标题称“品牌C和品牌D旗舰产品参数对比”",
+          "摘要称“普通数码产品测评”"
+        ],
+        "summary": "品牌C和品牌D旗舰产品参数对比，为普通数码产品测评。",
+        "claim_type": "opinion",
+        "verification_questions": [],
+        "confidence": 0.9
+      },
+      "risk_reasons": [
+        "AI研判：标题称“品牌C和品牌D旗舰产品参数对比”",
+        "AI研判：摘要称“普通数码产品测评”"
+      ]
+    },
+    {
+      "case_id": "holdout-packaging-copy",
+      "scenario": "包装设计被指抄袭",
+      "tags": [
+        "holdout",
+        "ai_required"
+      ],
+      "expected": {
+        "is_relevant": true,
+        "alert": true,
+        "risk_level": "medium"
+      },
+      "predicted": {
+        "is_relevant": true,
+        "risk_level": "medium",
+        "alert": true,
+        "matched_terms": [
+          "品牌C"
+        ],
+        "risk_reasons": [
+          "舆情弱信号：回应",
+          "AI研判：标题称“品牌C新品包装被指抄袭独立设计师”",
+          "AI研判：摘要称“设计师发布对比图，品牌暂未回应”"
+        ]
+      },
+      "relevance_correct": true,
+      "risk_correct": true,
+      "alert_correct": true,
+      "ai_applied": true,
+      "ai": {
+        "risk_level": "medium",
+        "relevance": "direct",
+        "risk_categories": [
+          "知识产权",
+          "抄袭指控",
+          "品牌声誉"
+        ],
+        "risk_reasons": [
+          "标题称“品牌C新品包装被指抄袭独立设计师”",
+          "摘要称“设计师发布对比图，品牌暂未回应”"
+        ],
+        "summary": "品牌C新品包装被指抄袭独立设计师，设计师发布对比图，品牌暂未回应。",
+        "claim_type": "unverified",
+        "verification_questions": [
+          "对比图是否构成实质相似？",
+          "是否涉及侵权认定？",
+          "品牌是否将回应？"
+        ],
+        "confidence": 0.8
+      },
+      "risk_reasons": [
+        "舆情弱信号：回应",
+        "AI研判：标题称“品牌C新品包装被指抄袭独立设计师”",
+        "AI研判：摘要称“设计师发布对比图，品牌暂未回应”"
+      ]
+    },
+    {
+      "case_id": "holdout-apology",
+      "scenario": "官方道歉声明高位传播",
+      "tags": [
+        "holdout",
+        "reputation"
+      ],
+      "expected": {
+        "is_relevant": true,
+        "alert": true,
+        "risk_level": "medium"
+      },
+      "predicted": {
+        "is_relevant": true,
+        "risk_level": "medium",
+        "alert": true,
+        "matched_terms": [
+          "品牌C"
+        ],
+        "risk_reasons": [
+          "法律与监管：整改",
+          "舆情弱信号：道歉",
+          "热榜高位：第 8 位",
+          "AI研判：标题称“品牌C官方发布道歉声明”",
+          "AI研判：摘要称“声明称将整改相关问题”"
+        ]
+      },
+      "relevance_correct": true,
+      "risk_correct": true,
+      "alert_correct": true,
+      "ai_applied": true,
+      "ai": {
+        "risk_level": "high",
+        "relevance": "direct",
+        "risk_categories": [
+          "公关声明",
+          "品牌声誉"
+        ],
+        "risk_reasons": [
+          "标题称“品牌C官方发布道歉声明”",
+          "摘要称“声明称将整改相关问题”"
+        ],
+        "summary": "品牌C官方发布道歉声明，声明称将整改相关问题。",
+        "claim_type": "fact",
+        "verification_questions": [
+          "道歉针对的具体问题是什么？",
+          "整改措施和时间表是什么？",
+          "是否与召回或塑化剂事件相关？"
+        ],
+        "confidence": 0.85
+      },
+      "risk_reasons": [
+        "法律与监管：整改",
+        "舆情弱信号：道歉",
+        "热榜高位：第 8 位",
+        "AI研判：标题称“品牌C官方发布道歉声明”",
+        "AI研判：摘要称“声明称将整改相关问题”"
+      ]
+    }
+  ],
+  "mode": "规则 + AI",
+  "model": "deepseek-flash"
+}

@@ -1,0 +1,1065 @@
+{
+  "generated_at": "2026-10-27T03:32:20+00:00",
+  "dataset_note": "该数据集是合成回归集，用于发现规则和模型链路退化，不代表真实业务准确率。真实准确率需要使用客户历史事件和人工标注集重新评估。",
+  "overall": {
+    "cases": 23,
+    "relevance_accuracy": 1.0,
+    "risk_accuracy": 0.8696,
+    "alert_precision": 1.0,
+    "alert_recall": 0.8,
+    "alert_f1": 0.8889,
+    "alert_accuracy": 0.8696,
+    "confusion": {
+      "tp": 12,
+      "fp": 0,
+      "fn": 3,
+      "tn": 8
+    }
+  },
+  "rule_regression": {
+    "cases": 19,
+    "relevance_accuracy": 1.0,
+    "risk_accuracy": 1.0,
+    "alert_precision": 1.0,
+    "alert_recall": 1.0,
+    "alert_f1": 1.0,
+    "alert_accuracy": 1.0,
+    "confusion": {
+      "tp": 12,
+      "fp": 0,
+      "fn": 0,
+      "tn": 7
+    }
+  },
+  "ai_required": {
+    "cases": 4,
+    "relevance_accuracy": 1.0,
+    "risk_accuracy": 0.25,
+    "alert_precision": 0.0,
+    "alert_recall": 0.0,
+    "alert_f1": 0.0,
+    "alert_accuracy": 0.25,
+    "confusion": {
+      "tp": 0,
+      "fp": 0,
+      "fn": 3,
+      "tn": 1
+    }
+  },
+  "by_tag": {
+    "ai_required": {
+      "cases": 4,
+      "relevance_accuracy": 1.0,
+      "risk_accuracy": 0.25,
+      "alert_precision": 0.0,
+      "alert_recall": 0.0,
+      "alert_f1": 0.0,
+      "alert_accuracy": 0.25,
+      "confusion": {
+        "tp": 0,
+        "fp": 0,
+        "fn": 3,
+        "tn": 1
+      }
+    },
+    "business": {
+      "cases": 1,
+      "relevance_accuracy": 1.0,
+      "risk_accuracy": 1.0,
+      "alert_precision": 0.0,
+      "alert_recall": 0.0,
+      "alert_f1": 0.0,
+      "alert_accuracy": 1.0,
+      "confusion": {
+        "tp": 0,
+        "fp": 0,
+        "fn": 0,
+        "tn": 1
+      }
+    },
+    "false_positive_control": {
+      "cases": 2,
+      "relevance_accuracy": 1.0,
+      "risk_accuracy": 1.0,
+      "alert_precision": 0.0,
+      "alert_recall": 0.0,
+      "alert_f1": 0.0,
+      "alert_accuracy": 1.0,
+      "confusion": {
+        "tp": 0,
+        "fp": 0,
+        "fn": 0,
+        "tn": 2
+      }
+    },
+    "legal": {
+      "cases": 2,
+      "relevance_accuracy": 1.0,
+      "risk_accuracy": 1.0,
+      "alert_precision": 1.0,
+      "alert_recall": 1.0,
+      "alert_f1": 1.0,
+      "alert_accuracy": 1.0,
+      "confusion": {
+        "tp": 2,
+        "fp": 0,
+        "fn": 0,
+        "tn": 0
+      }
+    },
+    "negative_control": {
+      "cases": 5,
+      "relevance_accuracy": 1.0,
+      "risk_accuracy": 1.0,
+      "alert_precision": 0.0,
+      "alert_recall": 0.0,
+      "alert_f1": 0.0,
+      "alert_accuracy": 1.0,
+      "confusion": {
+        "tp": 0,
+        "fp": 0,
+        "fn": 0,
+        "tn": 5
+      }
+    },
+    "policy": {
+      "cases": 2,
+      "relevance_accuracy": 1.0,
+      "risk_accuracy": 1.0,
+      "alert_precision": 1.0,
+      "alert_recall": 1.0,
+      "alert_f1": 1.0,
+      "alert_accuracy": 1.0,
+      "confusion": {
+        "tp": 1,
+        "fp": 0,
+        "fn": 0,
+        "tn": 1
+      }
+    },
+    "product": {
+      "cases": 3,
+      "relevance_accuracy": 1.0,
+      "risk_accuracy": 1.0,
+      "alert_precision": 1.0,
+      "alert_recall": 1.0,
+      "alert_f1": 1.0,
+      "alert_accuracy": 1.0,
+      "confusion": {
+        "tp": 3,
+        "fp": 0,
+        "fn": 0,
+        "tn": 0
+      }
+    },
+    "prompt_injection": {
+      "cases": 1,
+      "relevance_accuracy": 1.0,
+      "risk_accuracy": 1.0,
+      "alert_precision": 1.0,
+      "alert_recall": 1.0,
+      "alert_f1": 1.0,
+      "alert_accuracy": 1.0,
+      "confusion": {
+        "tp": 1,
+        "fp": 0,
+        "fn": 0,
+        "tn": 0
+      }
+    },
+    "reputation": {
+      "cases": 2,
+      "relevance_accuracy": 1.0,
+      "risk_accuracy": 1.0,
+      "alert_precision": 1.0,
+      "alert_recall": 1.0,
+      "alert_f1": 1.0,
+      "alert_accuracy": 1.0,
+      "confusion": {
+        "tp": 2,
+        "fp": 0,
+        "fn": 0,
+        "tn": 0
+      }
+    },
+    "rule_regression": {
+      "cases": 19,
+      "relevance_accuracy": 1.0,
+      "risk_accuracy": 1.0,
+      "alert_precision": 1.0,
+      "alert_recall": 1.0,
+      "alert_f1": 1.0,
+      "alert_accuracy": 1.0,
+      "confusion": {
+        "tp": 12,
+        "fp": 0,
+        "fn": 0,
+        "tn": 7
+      }
+    },
+    "rumor": {
+      "cases": 2,
+      "relevance_accuracy": 1.0,
+      "risk_accuracy": 0.5,
+      "alert_precision": 1.0,
+      "alert_recall": 0.5,
+      "alert_f1": 0.6667,
+      "alert_accuracy": 0.5,
+      "confusion": {
+        "tp": 1,
+        "fp": 0,
+        "fn": 1,
+        "tn": 0
+      }
+    },
+    "safety": {
+      "cases": 3,
+      "relevance_accuracy": 1.0,
+      "risk_accuracy": 0.6667,
+      "alert_precision": 1.0,
+      "alert_recall": 0.6667,
+      "alert_f1": 0.8,
+      "alert_accuracy": 0.6667,
+      "confusion": {
+        "tp": 2,
+        "fp": 0,
+        "fn": 1,
+        "tn": 0
+      }
+    },
+    "sarcasm": {
+      "cases": 1,
+      "relevance_accuracy": 1.0,
+      "risk_accuracy": 0.0,
+      "alert_precision": 0.0,
+      "alert_recall": 0.0,
+      "alert_f1": 0.0,
+      "alert_accuracy": 0.0,
+      "confusion": {
+        "tp": 0,
+        "fp": 0,
+        "fn": 1,
+        "tn": 0
+      }
+    }
+  },
+  "failures": [
+    {
+      "case_id": "sarcasm-complaint",
+      "scenario": "讽刺表达隐含售后投诉",
+      "tags": [
+        "ai_required",
+        "sarcasm"
+      ],
+      "expected": {
+        "is_relevant": true,
+        "alert": true,
+        "risk_level": "medium"
+      },
+      "predicted": {
+        "is_relevant": true,
+        "risk_level": "low",
+        "alert": false,
+        "matched_terms": [
+          "品牌A"
+        ],
+        "risk_reasons": []
+      },
+      "relevance_correct": true,
+      "risk_correct": false,
+      "alert_correct": false,
+      "ai_applied": false,
+      "ai": {},
+      "risk_reasons": []
+    },
+    {
+      "case_id": "implicit-safety",
+      "scenario": "未使用明确事故词的安全隐患",
+      "tags": [
+        "ai_required",
+        "safety"
+      ],
+      "expected": {
+        "is_relevant": true,
+        "alert": true,
+        "risk_level": "medium"
+      },
+      "predicted": {
+        "is_relevant": true,
+        "risk_level": "low",
+        "alert": false,
+        "matched_terms": [
+          "品牌A"
+        ],
+        "risk_reasons": []
+      },
+      "relevance_correct": true,
+      "risk_correct": false,
+      "alert_correct": false,
+      "ai_applied": false,
+      "ai": {},
+      "risk_reasons": []
+    },
+    {
+      "case_id": "unverified-collapse",
+      "scenario": "社群传播的未证实倒闭消息",
+      "tags": [
+        "ai_required",
+        "rumor"
+      ],
+      "expected": {
+        "is_relevant": true,
+        "alert": true,
+        "risk_level": "medium"
+      },
+      "predicted": {
+        "is_relevant": true,
+        "risk_level": "low",
+        "alert": false,
+        "matched_terms": [
+          "品牌A"
+        ],
+        "risk_reasons": []
+      },
+      "relevance_correct": true,
+      "risk_correct": false,
+      "alert_correct": false,
+      "ai_applied": false,
+      "ai": {},
+      "risk_reasons": []
+    }
+  ],
+  "rows": [
+    {
+      "case_id": "safety-explosion",
+      "scenario": "品牌产品发生爆炸事故并造成受伤",
+      "tags": [
+        "rule_regression",
+        "safety"
+      ],
+      "expected": {
+        "is_relevant": true,
+        "alert": true,
+        "risk_level": "high"
+      },
+      "predicted": {
+        "is_relevant": true,
+        "risk_level": "high",
+        "alert": true,
+        "matched_terms": [
+          "品牌A"
+        ],
+        "risk_reasons": [
+          "人身与安全：受伤、爆炸、事故",
+          "法律与监管：监管",
+          "热榜高位：第 2 位"
+        ]
+      },
+      "relevance_correct": true,
+      "risk_correct": true,
+      "alert_correct": true,
+      "ai_applied": false,
+      "ai": {},
+      "risk_reasons": [
+        "人身与安全：受伤、爆炸、事故",
+        "法律与监管：监管",
+        "热榜高位：第 2 位"
+      ]
+    },
+    {
+      "case_id": "safety-collapse",
+      "scenario": "门店安全事故造成受伤",
+      "tags": [
+        "rule_regression",
+        "safety"
+      ],
+      "expected": {
+        "is_relevant": true,
+        "alert": true,
+        "risk_level": "high"
+      },
+      "predicted": {
+        "is_relevant": true,
+        "risk_level": "high",
+        "alert": true,
+        "matched_terms": [
+          "品牌A"
+        ],
+        "risk_reasons": [
+          "人身与安全：受伤、坍塌、事故",
+          "法律与监管：调查",
+          "热榜高位：第 8 位"
+        ]
+      },
+      "relevance_correct": true,
+      "risk_correct": true,
+      "alert_correct": true,
+      "ai_applied": false,
+      "ai": {},
+      "risk_reasons": [
+        "人身与安全：受伤、坍塌、事故",
+        "法律与监管：调查",
+        "热榜高位：第 8 位"
+      ]
+    },
+    {
+      "case_id": "legal-investigation",
+      "scenario": "虚假宣传被立案调查",
+      "tags": [
+        "rule_regression",
+        "legal"
+      ],
+      "expected": {
+        "is_relevant": true,
+        "alert": true,
+        "risk_level": "medium"
+      },
+      "predicted": {
+        "is_relevant": true,
+        "risk_level": "medium",
+        "alert": true,
+        "matched_terms": [
+          "品牌A"
+        ],
+        "risk_reasons": [
+          "产品与消费者：虚假宣传",
+          "法律与监管：调查、立案、监管"
+        ]
+      },
+      "relevance_correct": true,
+      "risk_correct": true,
+      "alert_correct": true,
+      "ai_applied": false,
+      "ai": {},
+      "risk_reasons": [
+        "产品与消费者：虚假宣传",
+        "法律与监管：调查、立案、监管"
+      ]
+    },
+    {
+      "case_id": "quality-complaints",
+      "scenario": "多个质量问题投诉",
+      "tags": [
+        "rule_regression",
+        "product"
+      ],
+      "expected": {
+        "is_relevant": true,
+        "alert": true,
+        "risk_level": "medium"
+      },
+      "predicted": {
+        "is_relevant": true,
+        "risk_level": "medium",
+        "alert": true,
+        "matched_terms": [
+          "品牌A"
+        ],
+        "risk_reasons": [
+          "产品与消费者：质量问题、投诉、退款"
+        ]
+      },
+      "relevance_correct": true,
+      "risk_correct": true,
+      "alert_correct": true,
+      "ai_applied": false,
+      "ai": {},
+      "risk_reasons": [
+        "产品与消费者：质量问题、投诉、退款"
+      ]
+    },
+    {
+      "case_id": "product-recall",
+      "scenario": "产品召回",
+      "tags": [
+        "rule_regression",
+        "product"
+      ],
+      "expected": {
+        "is_relevant": true,
+        "alert": true,
+        "risk_level": "medium"
+      },
+      "predicted": {
+        "is_relevant": true,
+        "risk_level": "medium",
+        "alert": true,
+        "matched_terms": [
+          "品牌A"
+        ],
+        "risk_reasons": [
+          "产品与消费者：召回、安全隐患",
+          "热榜高位：第 7 位"
+        ]
+      },
+      "relevance_correct": true,
+      "risk_correct": true,
+      "alert_correct": true,
+      "ai_applied": false,
+      "ai": {},
+      "risk_reasons": [
+        "产品与消费者：召回、安全隐患",
+        "热榜高位：第 7 位"
+      ]
+    },
+    {
+      "case_id": "data-leak",
+      "scenario": "用户数据泄露",
+      "tags": [
+        "rule_regression",
+        "legal"
+      ],
+      "expected": {
+        "is_relevant": true,
+        "alert": true,
+        "risk_level": "medium"
+      },
+      "predicted": {
+        "is_relevant": true,
+        "risk_level": "medium",
+        "alert": true,
+        "matched_terms": [
+          "品牌A"
+        ],
+        "risk_reasons": [
+          "法律与监管：泄露"
+        ]
+      },
+      "relevance_correct": true,
+      "risk_correct": true,
+      "alert_correct": true,
+      "ai_applied": false,
+      "ai": {},
+      "risk_reasons": [
+        "法律与监管：泄露"
+      ]
+    },
+    {
+      "case_id": "apology-controversy",
+      "scenario": "争议后道歉",
+      "tags": [
+        "rule_regression",
+        "reputation"
+      ],
+      "expected": {
+        "is_relevant": true,
+        "alert": true,
+        "risk_level": "medium"
+      },
+      "predicted": {
+        "is_relevant": true,
+        "risk_level": "medium",
+        "alert": true,
+        "matched_terms": [
+          "品牌A"
+        ],
+        "risk_reasons": [
+          "舆情弱信号：争议、道歉"
+        ]
+      },
+      "relevance_correct": true,
+      "risk_correct": true,
+      "alert_correct": true,
+      "ai_applied": false,
+      "ai": {},
+      "risk_reasons": [
+        "舆情弱信号：争议、道歉"
+      ]
+    },
+    {
+      "case_id": "weak-response-low-rank",
+      "scenario": "榜单靠后的普通回应",
+      "tags": [
+        "rule_regression",
+        "negative_control"
+      ],
+      "expected": {
+        "is_relevant": true,
+        "alert": false,
+        "risk_level": "low"
+      },
+      "predicted": {
+        "is_relevant": true,
+        "risk_level": "low",
+        "alert": false,
+        "matched_terms": [
+          "品牌A"
+        ],
+        "risk_reasons": [
+          "舆情弱信号：回应"
+        ]
+      },
+      "relevance_correct": true,
+      "risk_correct": true,
+      "alert_correct": true,
+      "ai_applied": false,
+      "ai": {},
+      "risk_reasons": [
+        "舆情弱信号：回应"
+      ]
+    },
+    {
+      "case_id": "weak-response-top-rank",
+      "scenario": "高位传播的品牌回应",
+      "tags": [
+        "rule_regression",
+        "reputation"
+      ],
+      "expected": {
+        "is_relevant": true,
+        "alert": true,
+        "risk_level": "medium"
+      },
+      "predicted": {
+        "is_relevant": true,
+        "risk_level": "medium",
+        "alert": true,
+        "matched_terms": [
+          "品牌A"
+        ],
+        "risk_reasons": [
+          "舆情弱信号：争议、回应",
+          "热榜高位：第 4 位"
+        ]
+      },
+      "relevance_correct": true,
+      "risk_correct": true,
+      "alert_correct": true,
+      "ai_applied": false,
+      "ai": {},
+      "risk_reasons": [
+        "舆情弱信号：争议、回应",
+        "热榜高位：第 4 位"
+      ]
+    },
+    {
+      "case_id": "policy-top-rank",
+      "scenario": "行业新规排名靠前",
+      "tags": [
+        "rule_regression",
+        "policy"
+      ],
+      "expected": {
+        "is_relevant": true,
+        "alert": true,
+        "risk_level": "medium"
+      },
+      "predicted": {
+        "is_relevant": true,
+        "risk_level": "medium",
+        "alert": true,
+        "matched_terms": [
+          "新规"
+        ],
+        "risk_reasons": [
+          "法律与监管：监管",
+          "政策与宏观：新规",
+          "热榜高位：第 3 位"
+        ]
+      },
+      "relevance_correct": true,
+      "risk_correct": true,
+      "alert_correct": true,
+      "ai_applied": false,
+      "ai": {},
+      "risk_reasons": [
+        "法律与监管：监管",
+        "政策与宏观：新规",
+        "热榜高位：第 3 位"
+      ]
+    },
+    {
+      "case_id": "policy-low-rank",
+      "scenario": "行业新规排名靠后",
+      "tags": [
+        "rule_regression",
+        "policy",
+        "negative_control"
+      ],
+      "expected": {
+        "is_relevant": true,
+        "alert": false,
+        "risk_level": "low"
+      },
+      "predicted": {
+        "is_relevant": true,
+        "risk_level": "low",
+        "alert": false,
+        "matched_terms": [
+          "新规"
+        ],
+        "risk_reasons": [
+          "政策与宏观：政策、新规"
+        ]
+      },
+      "relevance_correct": true,
+      "risk_correct": true,
+      "alert_correct": true,
+      "ai_applied": false,
+      "ai": {},
+      "risk_reasons": [
+        "政策与宏观：政策、新规"
+      ]
+    },
+    {
+      "case_id": "unrelated-safety",
+      "scenario": "其他品牌发生安全事故",
+      "tags": [
+        "rule_regression",
+        "false_positive_control"
+      ],
+      "expected": {
+        "is_relevant": false,
+        "alert": false,
+        "risk_level": "high"
+      },
+      "predicted": {
+        "is_relevant": false,
+        "risk_level": "high",
+        "alert": false,
+        "matched_terms": [],
+        "risk_reasons": [
+          "人身与安全：受伤、火灾",
+          "热榜高位：第 1 位"
+        ]
+      },
+      "relevance_correct": true,
+      "risk_correct": true,
+      "alert_correct": true,
+      "ai_applied": false,
+      "ai": {},
+      "risk_reasons": [
+        "人身与安全：受伤、火灾",
+        "热榜高位：第 1 位"
+      ]
+    },
+    {
+      "case_id": "competitor-news",
+      "scenario": "竞品新品发布",
+      "tags": [
+        "rule_regression",
+        "false_positive_control"
+      ],
+      "expected": {
+        "is_relevant": false,
+        "alert": false,
+        "risk_level": "low"
+      },
+      "predicted": {
+        "is_relevant": false,
+        "risk_level": "low",
+        "alert": false,
+        "matched_terms": [],
+        "risk_reasons": []
+      },
+      "relevance_correct": true,
+      "risk_correct": true,
+      "alert_correct": true,
+      "ai_applied": false,
+      "ai": {},
+      "risk_reasons": []
+    },
+    {
+      "case_id": "positive-news",
+      "scenario": "品牌获奖",
+      "tags": [
+        "rule_regression",
+        "negative_control"
+      ],
+      "expected": {
+        "is_relevant": true,
+        "alert": false,
+        "risk_level": "low"
+      },
+      "predicted": {
+        "is_relevant": true,
+        "risk_level": "low",
+        "alert": false,
+        "matched_terms": [
+          "品牌A"
+        ],
+        "risk_reasons": []
+      },
+      "relevance_correct": true,
+      "risk_correct": true,
+      "alert_correct": true,
+      "ai_applied": false,
+      "ai": {},
+      "risk_reasons": []
+    },
+    {
+      "case_id": "no-watch-terms",
+      "scenario": "未设置监测词时不应自动告警",
+      "tags": [
+        "rule_regression",
+        "negative_control"
+      ],
+      "expected": {
+        "is_relevant": true,
+        "alert": false,
+        "risk_level": "high"
+      },
+      "predicted": {
+        "is_relevant": true,
+        "risk_level": "high",
+        "alert": false,
+        "matched_terms": [],
+        "risk_reasons": [
+          "人身与安全：受伤、事故",
+          "热榜高位：第 1 位"
+        ]
+      },
+      "relevance_correct": true,
+      "risk_correct": true,
+      "alert_correct": true,
+      "ai_applied": false,
+      "ai": {},
+      "risk_reasons": [
+        "人身与安全：受伤、事故",
+        "热榜高位：第 1 位"
+      ]
+    },
+    {
+      "case_id": "rumor-unverified",
+      "scenario": "未证实传闻进入热榜",
+      "tags": [
+        "rule_regression",
+        "rumor"
+      ],
+      "expected": {
+        "is_relevant": true,
+        "alert": true,
+        "risk_level": "medium"
+      },
+      "predicted": {
+        "is_relevant": true,
+        "risk_level": "medium",
+        "alert": true,
+        "matched_terms": [
+          "品牌A"
+        ],
+        "risk_reasons": [
+          "舆情弱信号：辟谣",
+          "热榜高位：第 9 位"
+        ]
+      },
+      "relevance_correct": true,
+      "risk_correct": true,
+      "alert_correct": true,
+      "ai_applied": false,
+      "ai": {},
+      "risk_reasons": [
+        "舆情弱信号：辟谣",
+        "热榜高位：第 9 位"
+      ]
+    },
+    {
+      "case_id": "executive-change",
+      "scenario": "高管人事变动",
+      "tags": [
+        "rule_regression",
+        "business"
+      ],
+      "expected": {
+        "is_relevant": true,
+        "alert": false,
+        "risk_level": "low"
+      },
+      "predicted": {
+        "is_relevant": true,
+        "risk_level": "low",
+        "alert": false,
+        "matched_terms": [
+          "品牌A"
+        ],
+        "risk_reasons": []
+      },
+      "relevance_correct": true,
+      "risk_correct": true,
+      "alert_correct": true,
+      "ai_applied": false,
+      "ai": {},
+      "risk_reasons": []
+    },
+    {
+      "case_id": "consumer-rights",
+      "scenario": "消费者集中维权",
+      "tags": [
+        "rule_regression",
+        "product"
+      ],
+      "expected": {
+        "is_relevant": true,
+        "alert": true,
+        "risk_level": "medium"
+      },
+      "predicted": {
+        "is_relevant": true,
+        "risk_level": "medium",
+        "alert": true,
+        "matched_terms": [
+          "品牌A"
+        ],
+        "risk_reasons": [
+          "产品与消费者：维权、退款"
+        ]
+      },
+      "relevance_correct": true,
+      "risk_correct": true,
+      "alert_correct": true,
+      "ai_applied": false,
+      "ai": {},
+      "risk_reasons": [
+        "产品与消费者：维权、退款"
+      ]
+    },
+    {
+      "case_id": "prompt-injection",
+      "scenario": "内容包含提示注入文本",
+      "tags": [
+        "rule_regression",
+        "prompt_injection"
+      ],
+      "expected": {
+        "is_relevant": true,
+        "alert": true,
+        "risk_level": "medium"
+      },
+      "predicted": {
+        "is_relevant": true,
+        "risk_level": "medium",
+        "alert": true,
+        "matched_terms": [
+          "品牌A"
+        ],
+        "risk_reasons": [
+          "舆情弱信号：争议、回应",
+          "热榜高位：第 6 位"
+        ]
+      },
+      "relevance_correct": true,
+      "risk_correct": true,
+      "alert_correct": true,
+      "ai_applied": false,
+      "ai": {},
+      "risk_reasons": [
+        "舆情弱信号：争议、回应",
+        "热榜高位：第 6 位"
+      ]
+    },
+    {
+      "case_id": "sarcasm-complaint",
+      "scenario": "讽刺表达隐含售后投诉",
+      "tags": [
+        "ai_required",
+        "sarcasm"
+      ],
+      "expected": {
+        "is_relevant": true,
+        "alert": true,
+        "risk_level": "medium"
+      },
+      "predicted": {
+        "is_relevant": true,
+        "risk_level": "low",
+        "alert": false,
+        "matched_terms": [
+          "品牌A"
+        ],
+        "risk_reasons": []
+      },
+      "relevance_correct": true,
+      "risk_correct": false,
+      "alert_correct": false,
+      "ai_applied": false,
+      "ai": {},
+      "risk_reasons": []
+    },
+    {
+      "case_id": "implicit-safety",
+      "scenario": "未使用明确事故词的安全隐患",
+      "tags": [
+        "ai_required",
+        "safety"
+      ],
+      "expected": {
+        "is_relevant": true,
+        "alert": true,
+        "risk_level": "medium"
+      },
+      "predicted": {
+        "is_relevant": true,
+        "risk_level": "low",
+        "alert": false,
+        "matched_terms": [
+          "品牌A"
+        ],
+        "risk_reasons": []
+      },
+      "relevance_correct": true,
+      "risk_correct": false,
+      "alert_correct": false,
+      "ai_applied": false,
+      "ai": {},
+      "risk_reasons": []
+    },
+    {
+      "case_id": "unverified-collapse",
+      "scenario": "社群传播的未证实倒闭消息",
+      "tags": [
+        "ai_required",
+        "rumor"
+      ],
+      "expected": {
+        "is_relevant": true,
+        "alert": true,
+        "risk_level": "medium"
+      },
+      "predicted": {
+        "is_relevant": true,
+        "risk_level": "low",
+        "alert": false,
+        "matched_terms": [
+          "品牌A"
+        ],
+        "risk_reasons": []
+      },
+      "relevance_correct": true,
+      "risk_correct": false,
+      "alert_correct": false,
+      "ai_applied": false,
+      "ai": {},
+      "risk_reasons": []
+    },
+    {
+      "case_id": "comparison-low-risk",
+      "scenario": "品牌对比讨论但没有风险事实",
+      "tags": [
+        "ai_required",
+        "negative_control"
+      ],
+      "expected": {
+        "is_relevant": true,
+        "alert": false,
+        "risk_level": "low"
+      },
+      "predicted": {
+        "is_relevant": true,
+        "risk_level": "low",
+        "alert": false,
+        "matched_terms": [
+          "品牌A"
+        ],
+        "risk_reasons": []
+      },
+      "relevance_correct": true,
+      "risk_correct": true,
+      "alert_correct": true,
+      "ai_applied": false,
+      "ai": {},
+      "risk_reasons": []
+    }
+  ],
+  "mode": "规则引擎",
+  "model": ""
+}
