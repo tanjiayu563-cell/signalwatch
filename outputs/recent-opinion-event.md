@@ -1,39 +1,38 @@
 # 苹果回应iPhone Duo折叠屏开裂
 
-- 生成时间：2026-10-27T03:50:23+00:00
-- 风险等级：high
+- 生成时间：2026-10-27T04:01:16+00:00
+- 风险等级：medium
 - 监测命中：iphone duo
 - 涉及来源：今日头条热榜、微博热搜
 - 首次发现：2026-10-27T03:03:06+00:00
-- 最近更新：2026-10-27T03:50:03+00:00
+- 最近更新：2026-10-27T04:01:01+00:00
 - 人工状态：new
 
 ## 事件摘要
 
-今日头条热榜第 21 位，热度 2010191
+今日头条热榜第 21 位，热度 2025571
 
 ## 规则研判
 
 - 舆情弱信号：回应
-- AI研判：标题直接涉及“iPhone Duo折叠屏开裂”，并称“苹果回应”，指向产品质量争议。
-- AI研判：该话题位于今日头条热榜第21位，热度2010191，具备较高传播量。
-- AI研判：标题称“富士康员工曝iPhoneDuo碎屏原因”，涉及产品质量与供应链爆料。
-- AI研判：该话题位于微博热搜第47位，热度210591，已进入热搜榜。
-- AI研判：爆料主体为“富士康员工”，证据中未提供身份或原因细节，真实性待核。
+- AI研判：标题称“苹果回应iPhone Duo折叠屏开裂”，直指产品屏幕开裂问题且有官方回应环节
+- AI研判：该条位列今日头条热榜第21位，热度2025571，说明话题已形成较大传播量
+- AI研判：标题称“富士康员工曝iPhoneDuo碎屏原因”，信源为富士康员工爆料，涉及碎屏原因归因
+- AI研判：该条位列微博热搜第50位，热度200867，已进入热搜榜但排名相对靠后
 - 声誉与传播：回应
 
 ## AI 辅助研判
 
-今日头条热榜第21位出现“苹果回应iPhone Duo折叠屏开裂”，热度2010191。
+今日头条热榜第21位，热度2025571，标题为“苹果回应iPhone Duo折叠屏开裂”，涉及iPhone Duo折叠屏开裂及苹果方面的回应。
 
 - 模型风险等级：high
 - 信息类型：claim
-- 置信度：0.9
-- AI 原因：标题直接涉及“iPhone Duo折叠屏开裂”，并称“苹果回应”，指向产品质量争议。
-- AI 原因：该话题位于今日头条热榜第21位，热度2010191，具备较高传播量。
-- 待核查：苹果是否就“iPhone Duo折叠屏开裂”发布正式回应，回应原文和时间是什么？
-- 待核查：涉事产品名称是否为“iPhone Duo”，开裂案例的数量、批次和范围如何？
-- 待核查：“折叠屏开裂”的原因是否已有官方或第三方检测结论？
+- 置信度：0.85
+- AI 原因：标题称“苹果回应iPhone Duo折叠屏开裂”，直指产品屏幕开裂问题且有官方回应环节
+- AI 原因：该条位列今日头条热榜第21位，热度2025571，说明话题已形成较大传播量
+- 待核查：苹果官方是否确有关于iPhone Duo折叠屏开裂的公开回应，原文与发布渠道为何？
+- 待核查：开裂问题是否属于特定批次或设计缺陷，受影响范围与数量如何？
+- 待核查：该话题在头条热榜的热度值与实际上榜情况是否准确？
 
 ## 证据链
 
@@ -42,17 +41,17 @@
 - 来源：今日头条热榜
 - 作者：今日头条热榜
 - 榜单：21
-- 热度：2010191
+- 热度：2025571
 - 发布时间：未提供
 - 首次采集：2026-10-27T03:03:06+00:00
-- 原文链接：https://www.toutiao.com/trending/7701119534823951898/?category_name=topic_innerflow&event_type=hot_board&log_pb=%7B%22category_name%22%3A%22topic_innerflow%22%2C%22cluster_type%22%3A%225%22%2C%22enter_from%22%3A%22click_category%22%2C%22entrance_hotspot%22%3A%22outside%22%2C%22event_type%22%3A%22hot_board%22%2C%22hot_board_cluster_id%22%3A%227701119534823951898%22%2C%22hot_board_impr_id%22%3A%22202610271150051939ECECAB0960B7808F%22%2C%22jump_page%22%3A%22hot_board_page%22%2C%22location%22%3A%22news_hot_card%22%2C%22page_location%22%3A%22hot_board_page%22%2C%22source%22%3A%22trending_tab%22%2C%22style_id%22%3A%2240132%22%2C%22title%22%3A%22%E8%8B%B9%E6%9E%9C%E5%9B%9E%E5%BA%94iPhone+Duo%E6%8A%98%E5%8F%A0%E5%B1%8F%E5%BC%80%E8%A3%82%22%7D&rank=&style_id=40132&topic_id=7701119534823951898
+- 原文链接：https://www.toutiao.com/trending/7701119534823951898/?category_name=topic_innerflow&event_type=hot_board&log_pb=%7B%22category_name%22%3A%22topic_innerflow%22%2C%22cluster_type%22%3A%225%22%2C%22enter_from%22%3A%22click_category%22%2C%22entrance_hotspot%22%3A%22outside%22%2C%22event_type%22%3A%22hot_board%22%2C%22hot_board_cluster_id%22%3A%227701119534823951898%22%2C%22hot_board_impr_id%22%3A%2220261027120103338F5E8ED9EE93CB3899%22%2C%22jump_page%22%3A%22hot_board_page%22%2C%22location%22%3A%22news_hot_card%22%2C%22page_location%22%3A%22hot_board_page%22%2C%22source%22%3A%22trending_tab%22%2C%22style_id%22%3A%2240132%22%2C%22title%22%3A%22%E8%8B%B9%E6%9E%9C%E5%9B%9E%E5%BA%94iPhone+Duo%E6%8A%98%E5%8F%A0%E5%B1%8F%E5%BC%80%E8%A3%82%22%7D&rank=&style_id=40132&topic_id=7701119534823951898
 
 ### 2. 富士康员工曝iPhoneDuo碎屏原因
 
 - 来源：微博热搜
 - 作者：微博热搜
-- 榜单：47
-- 热度：210591
+- 榜单：50
+- 热度：200867
 - 发布时间：未提供
 - 首次采集：2026-10-27T03:03:06+00:00
 - 原文链接：https://s.weibo.com/weibo?q=%E5%AF%8C%E5%A3%AB%E5%BA%B7%E5%91%98%E5%B7%A5%E6%9B%9DiPhoneDuo%E7%A2%8E%E5%B1%8F%E5%8E%9F%E5%9B%A0

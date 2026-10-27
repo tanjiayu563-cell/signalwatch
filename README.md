@@ -1,3 +1,5 @@
+[![CI](https://github.com/tanjiayu563-cell/signalwatch/actions/workflows/ci.yml/badge.svg)](https://github.com/tanjiayu563-cell/signalwatch/actions/workflows/ci.yml)
+
 # SignalWatch 舆情雷达 MVP
 
 一个可直接运行的公开舆情监测与危机预警工作台。当前版本接入了 5 个真实公开来源，完成采集、规范化、去重、关键词命中、风险分级、事件聚合、证据展示和人工处置闭环。
@@ -26,7 +28,8 @@
 无需安装第三方依赖，要求 Python 3.9 或以上：
 
 ```bash
-cd /Users/tanjiayu/Documents/Codex/2026-10-27/xia
+git clone https://github.com/tanjiayu563-cell/signalwatch.git
+cd signalwatch
 python3 app.py
 ```
 
@@ -38,7 +41,7 @@ http://127.0.0.1:8765
 
 停止服务：在运行终端按 `Ctrl+C`。
 
-### 当前机器直接启动（推荐）
+### 本机开发启动
 
 ```bash
 cd /Users/tanjiayu/Documents/Codex/2026-10-27/xia
@@ -289,6 +292,8 @@ data/                        SQLite 和本机授权文件
 - [演示脚本](docs/DEMO.md)
 - [简历项目描述](docs/RESUME.md)
 - [评测报告](outputs/evaluation-report.md)
+- [规则与模型对比](outputs/evaluation-comparison.md)
+- [近期事件报告](outputs/recent-opinion-event.md)
 
 ## 推荐后续版本
 
