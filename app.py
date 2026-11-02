@@ -230,7 +230,7 @@ def main() -> None:
     scan_thread.start()
 
     server = MonitorHTTPServer((args.host, args.port), Handler, service)
-    print(f"舆情雷达已启动：http://{args.host}:{args.port}")
+    print(f"蓝色光标舆情监测已启动：http://{args.host}:{args.port}")
     print(f"数据库：{DB_PATH}")
     print(f"自动扫描间隔：{SCAN_INTERVAL_SECONDS} 秒")
     try:

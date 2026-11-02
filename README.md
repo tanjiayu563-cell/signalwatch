@@ -1,6 +1,8 @@
 [![CI](https://github.com/tanjiayu563-cell/signalwatch/actions/workflows/ci.yml/badge.svg)](https://github.com/tanjiayu563-cell/signalwatch/actions/workflows/ci.yml)
 
-# SignalWatch 舆情雷达 MVP
+# 蓝色光标舆情监测
+
+> 本项目是独立的技术演示与个人研究项目，不代表蓝色光标官方产品，也不存在隶属、合作或授权关系。
 
 一个可直接运行的公开舆情监测与危机预警工作台。当前版本接入了 5 个真实公开来源，完成采集、规范化、去重、关键词命中、风险分级、事件聚合、证据展示和人工处置闭环。
 

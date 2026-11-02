@@ -12,7 +12,7 @@ from monitor_agent.evaluation import build_results, load_cases, predict_cases, r
 
 
 def main() -> None:
-    parser = argparse.ArgumentParser(description="运行 SignalWatch 合成回归评测")
+    parser = argparse.ArgumentParser(description="运行蓝色光标舆情监测合成回归评测")
     parser.add_argument("--dataset", default=str(ROOT / "eval" / "cases.jsonl"))
     parser.add_argument("--output-dir", default=str(ROOT / "outputs"))
     parser.add_argument("--use-ai", action="store_true", help="使用环境变量配置的模型")

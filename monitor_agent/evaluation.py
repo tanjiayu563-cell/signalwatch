@@ -196,7 +196,7 @@ def render_markdown(report: Dict[str, Any], mode: str, model: str = "") -> str:
     overall = report["overall"]
     confusion = overall["confusion"]
     lines = [
-        "# SignalWatch 评测报告",
+        "# 蓝色光标舆情监测评测报告",
         "",
         f"- 生成时间：{report['generated_at']}",
         f"- 运行模式：{mode}" + (f"（{model}）" if model else ""),
