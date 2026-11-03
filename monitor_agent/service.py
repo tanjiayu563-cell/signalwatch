@@ -8,7 +8,8 @@ from typing import Any, Dict, Iterable, List, Optional
 from . import database
 from .ai import AIClient, merge_ai_result
 from .analyzer import analyze_item, cluster_items
-from .config import SCAN_INTERVAL_SECONDS
+from .article_reader import ArticleReadError, read_article
+from .config import COMPANY_NAME, SCAN_INTERVAL_SECONDS
 from .credentials import (
     credential_summary,
     delete_credential,
@@ -17,6 +18,7 @@ from .credentials import (
 )
 from .notifications import Notifier
 from .sources import (
+    stable_id,
     AUTH_REQUIRED_SOURCES,
     PUBLIC_SOURCE_IDS,
     SOURCE_CATALOG,
@@ -28,6 +30,7 @@ from .sources import (
 
 SOURCE_NAMES = {source["id"]: source["name"] for source in SOURCE_CATALOG}
 SOURCE_NAMES.update({source["id"]: source["name"] for source in AUTH_REQUIRED_SOURCES})
+SOURCE_NAMES["manual_article"] = "手动导入文章"
 AUTH_SOURCE_IDS = {source["id"] for source in AUTH_REQUIRED_SOURCES}
 RISK_ORDER = {"high": 3, "medium": 2, "low": 1}
 COVERAGE_NOTE = (
@@ -425,6 +428,146 @@ class MonitorService:
             "details": details or {},
             "at": utc_now(),
         }
+
+    def import_article(self, url: str) -> Dict[str, Any]:
+        article = read_article(url)
+        canonical_url = article.get("canonical_url") or url
+        title = article.get("title") or article.get("original_title") or canonical_url
+        title = re.split(r"[_|]", title, maxsplit=1)[0].strip() or canonical_url
+        text = article.get("text", "")
+        summary_parts = [article.get("description", ""), text[:1200]]
+        summary = " ".join(part for part in summary_parts if part).strip()[:1500]
+        fetched_at = utc_now()
+        item = {
+            "id": stable_id("manual_article", canonical_url),
+            "source": "manual_article",
+            "external_id": canonical_url,
+            "title": title[:240],
+            "url": canonical_url,
+            "summary": summary,
+            "author": article.get("site_name", ""),
+            "published_at": article.get("published_at") or None,
+            "first_seen_at": fetched_at,
+            "fetched_at": fetched_at,
+            "rank": None,
+            "hot_value": None,
+            "raw": {
+                "site_name": article.get("site_name", ""),
+                "description": article.get("description", ""),
+                "canonical_url": canonical_url,
+                "imported": True,
+            },
+        }
+        terms = database.get_watch_terms()
+        analysis = analyze_item(item, terms)
+        database.upsert_item(item, analysis)
+        return {
+            "item": {**item, "raw": None},
+            "analysis": analysis,
+            "article": {
+                "title": article.get("title", ""),
+                "site_name": article.get("site_name", ""),
+                "char_count": article.get("char_count", 0),
+                "url": canonical_url,
+            },
+        }
+
+    def article_content(self, item_id: str) -> Optional[Dict[str, Any]]:
+        item = database.get_item(item_id)
+        if not item:
+            return None
+        article = read_article(item["url"])
+        article["item_id"] = item_id
+        article["original_title"] = item.get("title", "")
+        article["original_url"] = item["url"]
+        article["source"] = item.get("source", "")
+        return article
+
+    def analyze_event_public_relations(
+        self, event_id: str, force: bool = False
+    ) -> Optional[Dict[str, Any]]:
+        cached = database.get_event_analysis(event_id)
+        if cached and not force:
+            return {**cached, "cached": True}
+
+        state = self.state()
+        event = next((item for item in state["events"] if item["id"] == event_id), None)
+        if not event:
+            return None
+        if not self.ai_client.enabled:
+            raise ValueError("AI 模型未配置")
+
+        evidence_items = event.get("items", [])[:5]
+        evidence: List[Dict[str, Any]] = []
+
+        def collect_article(index: int, item: Dict[str, Any]) -> Dict[str, Any]:
+            evidence_id = f"E{index + 1}"
+            result = {
+                "evidence_id": evidence_id,
+                "id": item.get("id"),
+                "source": item.get("source", ""),
+                "title": item.get("title", ""),
+                "url": item.get("url", ""),
+                "published_at": item.get("published_at"),
+                "summary": item.get("summary", ""),
+                "text": "",
+                "content_error": "",
+            }
+            try:
+                article = read_article(item["url"])
+                result.update(
+                    {
+                        "text": article.get("text", ""),
+                        "site_name": article.get("site_name", ""),
+                        "published_at": article.get("published_at")
+                        or result.get("published_at"),
+                    }
+                )
+            except ArticleReadError as exc:
+                result["text"] = item.get("summary", "")
+                result["content_error"] = str(exc)[:300]
+            return result
+
+        with ThreadPoolExecutor(max_workers=max(1, min(3, len(evidence_items)))) as executor:
+            futures = {
+                executor.submit(collect_article, index, item): index
+                for index, item in enumerate(evidence_items)
+            }
+            for future in as_completed(futures):
+                try:
+                    evidence.append(future.result())
+                except Exception as exc:
+                    index = futures[future]
+                    item = evidence_items[index]
+                    evidence.append(
+                        {
+                            "evidence_id": f"E{index + 1}",
+                            "id": item.get("id"),
+                            "source": item.get("source", ""),
+                            "title": item.get("title", ""),
+                            "url": item.get("url", ""),
+                            "text": item.get("summary", ""),
+                            "content_error": f"{type(exc).__name__}: {exc}"[:300],
+                        }
+                    )
+        evidence.sort(key=lambda item: item.get("evidence_id", ""))
+
+        ai_result = self.ai_client.analyze_public_relations(
+            COMPANY_NAME, event, evidence
+        )
+        if not ai_result.ok:
+            raise RuntimeError(ai_result.error)
+        analysis = dict(ai_result.analysis)
+        analysis["model"] = self.ai_client.model
+        analysis["company"] = COMPANY_NAME
+        database.save_event_analysis(
+            event_id,
+            self.ai_client.model,
+            analysis,
+            evidence,
+        )
+        saved = database.get_event_analysis(event_id) or {}
+        return {**saved, "cached": False}
 
     def review_items(self, item_ids: Iterable[str], status: str, note: str = "") -> int:
         return database.review_items(item_ids, status, note)

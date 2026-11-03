@@ -10,9 +10,10 @@ from pathlib import Path
 from typing import Any, Dict, Optional
 from urllib.parse import parse_qs, unquote, urlparse
 
-from monitor_agent.config import DB_PATH, HOST, PORT, SCAN_INTERVAL_SECONDS
-from monitor_agent.database import init_db
-from monitor_agent.service import MonitorService
+from monitor_agent.article_reader import ArticleReadError
+from monitor_agent.config import DB_PATH, DEFAULT_WATCH_TERMS, HOST, PORT, SCAN_INTERVAL_SECONDS
+from monitor_agent.database import get_watch_terms, init_db, set_watch_terms
+from monitor_agent.service import MonitorService, split_terms
 
 
 BASE_DIR = Path(__file__).resolve().parent
@@ -94,6 +95,18 @@ class Handler(BaseHTTPRequestHandler):
             else:
                 self._send_json(run)
             return
+        if path == "/api/article":
+            item_id = parse_qs(urlparse(self.path).query).get("item_id", [""])[0]
+            try:
+                article = self.server.service.article_content(item_id)
+            except ArticleReadError as exc:
+                self._error(502, str(exc))
+                return
+            if not article:
+                self._error(404, "未找到该文章")
+            else:
+                self._send_json({"article": article})
+            return
         if path == "/api/reports/event":
             event_id = parse_qs(urlparse(self.path).query).get("event_id", [""])[0]
             report = self.server.service.event_report(event_id)
@@ -146,6 +159,32 @@ class Handler(BaseHTTPRequestHandler):
                     str(payload.get("source_id") or "")
                 )
                 self._send_json({"ok": True, "removed": removed})
+                return
+            if path == "/api/articles/import":
+                url = str(payload.get("url") or "").strip()
+                if not url:
+                    raise ValueError("请填写文章链接")
+                try:
+                    imported = self.server.service.import_article(url)
+                except ArticleReadError as exc:
+                    self._error(502, str(exc))
+                    return
+                self._send_json({"ok": True, **imported})
+                return
+            if path == "/api/events/analyze":
+                event_id = str(payload.get("event_id") or "")
+                force = bool(payload.get("force", False))
+                try:
+                    analysis = self.server.service.analyze_event_public_relations(
+                        event_id, force=force
+                    )
+                except (ValueError, RuntimeError) as exc:
+                    self._error(502, str(exc))
+                    return
+                if not analysis:
+                    self._error(404, "未找到该事件")
+                else:
+                    self._send_json({"analysis": analysis})
                 return
             if path == "/api/reviews":
                 item_ids = payload.get("item_ids") or []
@@ -215,6 +254,8 @@ def main() -> None:
     args = parser.parse_args()
 
     init_db()
+    if not get_watch_terms() and DEFAULT_WATCH_TERMS:
+        set_watch_terms(split_terms(DEFAULT_WATCH_TERMS))
     service = MonitorService()
     if args.scan_once:
         print(json.dumps(service.scan(trigger="cli"), ensure_ascii=False, indent=2))

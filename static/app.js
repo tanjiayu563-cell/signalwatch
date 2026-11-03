@@ -4,11 +4,13 @@ const app = {
   busy: false,
   eventMap: new Map(),
   runMap: new Map(),
+  itemMap: new Map(),
   previousWatchTerms: "",
 };
 
 const $ = (selector) => document.querySelector(selector);
 const $$ = (selector) => Array.from(document.querySelectorAll(selector));
+const SOURCE_LABELS = {manual_article: "手动导入文章"};
 
 function esc(value) {
   return String(value ?? "")
@@ -50,7 +52,7 @@ function formatHotValue(value) {
 
 function sourceName(sourceId) {
   const source = app.state?.sources?.find((entry) => entry.id === sourceId);
-  return source?.name || sourceId;
+  return source?.name || SOURCE_LABELS[sourceId] || sourceId;
 }
 
 function riskLabel(risk) {
@@ -241,7 +243,12 @@ function renderAuthSources(sources) {
 function renderSourceFilter(sources) {
   const select = $("#sourceFilter");
   const current = select.value || "all";
-  select.innerHTML = `<option value="all">全部来源</option>` + sources
+  const knownIds = new Set(sources.map((source) => source.id));
+  const dynamicSources = (app.state?.items || [])
+    .map((item) => item.source)
+    .filter((sourceId, index, all) => sourceId && !knownIds.has(sourceId) && all.indexOf(sourceId) === index)
+    .map((sourceId) => ({id: sourceId, name: SOURCE_LABELS[sourceId] || sourceId}));
+  select.innerHTML = `<option value="all">全部来源</option>` + [...sources, ...dynamicSources]
     .filter((source) => !source.auth_required || source.credential?.configured)
     .map((source) => `<option value="${esc(source.id)}">${esc(source.name)}</option>`)
     .join("");
@@ -299,6 +306,9 @@ function renderFeed() {
   const list = $("#feedList");
   app.eventMap = new Map(app.state.events.map((event) => [event.id, event]));
   app.runMap = new Map((app.state.agent_runs || []).map((run) => [run.id, run]));
+  app.itemMap = new Map(
+    app.state.events.flatMap((event) => event.items || []).map((item) => [item.id, item])
+  );
   if (app.tab === "events") {
     renderEvents(list);
   } else if (app.tab === "items") {
@@ -550,6 +560,145 @@ async function saveWatchTerms(event) {
   }
 }
 
+async function openImportArticle() {
+  $("#importUrl").value = "";
+  $("#importModal").showModal();
+  setTimeout(() => $("#importUrl").focus(), 50);
+}
+
+async function submitImportArticle(event) {
+  if (event.submitter?.value === "cancel") return;
+  event.preventDefault();
+  const url = $("#importUrl").value.trim();
+  if (!url) { toast("请填写文章链接", true); return; }
+  const button = $("#importSubmit");
+  button.disabled = true;
+  button.textContent = "读取中…";
+  try {
+    const result = await api("/api/articles/import", {method:"POST", body:JSON.stringify({url})});
+    $("#importModal").close();
+    const matched = result.analysis?.matched_terms || [];
+    toast(matched.length ? `文章已导入，命中监测词：${matched.join("、")}` : "文章已导入，但未命中当前监测词");
+    await loadState({quiet:true});
+    if (matched.length) {
+      $("#matchedOnly").checked = true;
+      renderFeed();
+    }
+  } catch (error) {
+    toast(error.message, true);
+  } finally {
+    button.disabled = false;
+    button.textContent = "读取并导入";
+  }
+}
+
+async function openArticle(itemId) {
+  const item = app.itemMap.get(itemId) || {};
+  const content = $("#articleContent");
+  const originalUrl = safeUrl(item.url);
+  content.innerHTML = `
+    <div class="detail-headline"><span class="section-kicker">SOURCE ARTICLE</span><h2>正在读取原文…</h2></div>
+    <p class="detail-summary">系统正在提取原网页正文。部分平台可能需要登录或依赖 JavaScript，提取失败时会保留原网页入口。</p>
+    <div class="radar-loader"><span></span></div>
+  `;
+  $("#articleModal").showModal();
+  try {
+    const result = await api(`/api/article?item_id=${encodeURIComponent(itemId)}`);
+    const article = result.article || {};
+    const paragraphs = String(article.text || "").split(/\n{2,}/).filter(Boolean);
+    content.innerHTML = `
+      <div class="detail-headline">
+        <span class="section-kicker">SOURCE ARTICLE</span>
+        <h2>${esc(article.title || article.original_title || "原始文章")}</h2>
+      </div>
+      <div class="detail-meta">
+        <span class="badge neutral">${esc(article.site_name || sourceName(article.source))}</span>
+        <span class="badge neutral">${esc(article.char_count || 0)} 字</span>
+        <span class="badge neutral">${formatTime(article.published_at || article.fetched_at)}</span>
+      </div>
+      <div class="article-body">${paragraphs.map((paragraph) => `<p>${esc(paragraph)}</p>`).join("")}</div>
+      <div class="modal-actions">
+        <a class="button button-primary" href="${safeUrl(article.canonical_url || article.original_url || item.url)}" target="_blank" rel="noopener noreferrer">打开原网页 ↗</a>
+      </div>
+      <div class="security-note">正文仅用于当前监测研判，请以原始网页为准，并遵守来源平台版权和访问条款。</div>
+    `;
+  } catch (error) {
+    content.innerHTML = `
+      <div class="detail-headline"><span class="section-kicker">SOURCE ARTICLE</span><h2>${esc(item.title || "无法读取原文")}</h2></div>
+      <div class="security-note">${esc(error.message)}</div>
+      <p class="detail-summary">该平台可能要求登录、验证或 JavaScript 渲染。请通过原始链接查看。</p>
+      <div class="modal-actions">
+        <a class="button button-primary" href="${originalUrl}" target="_blank" rel="noopener noreferrer">打开原网页 ↗</a>
+      </div>
+    `;
+  }
+}
+
+function prStageLabel(value) {
+  return {latent:"潜伏期", emerging:"初现期", outbreak:"爆发期", spreading:"扩散期", receding:"回落期", unknown:"阶段不明"}[value] || "阶段不明";
+}
+
+function crisisTypeLabel(value) {
+  return {victim:"受害者型", accidental:"意外型", preventable:"可预防型", not_crisis:"非危机", unknown:"类型不明"}[value] || "类型不明";
+}
+
+function renderPrAnalysis(analysis) {
+  const stakeholders = (analysis.stakeholders || []).map((item) => `
+    <div class="pr-list-item"><strong>${esc(item.name || "未命名")}</strong><span>${esc(item.priority || "")}</span><p>${esc(item.concern || "")}${item.impact ? ` · ${esc(item.impact)}` : ""}</p></div>
+  `).join("");
+  const actions = (analysis.immediate_actions || []).map((item) => `
+    <div class="pr-list-item"><strong>${esc(item.timing || "ongoing")}</strong><p>${esc(item.action || "")}${item.reason ? `<br><small>${esc(item.reason)}</small>` : ""}</p></div>
+  `).join("");
+  return `
+    <div class="pr-analysis">
+      <div class="pr-summary">${esc(analysis.executive_summary || "暂无摘要")}</div>
+      <div class="pr-grid">
+        <div class="pr-metric"><span>议题阶段</span><strong>${esc(prStageLabel(analysis.issue_stage))}</strong></div>
+        <div class="pr-metric"><span>危机类型</span><strong>${esc(crisisTypeLabel(analysis.crisis_type))}</strong></div>
+        <div class="pr-metric"><span>严重程度</span><strong>${esc(riskLabel(analysis.severity))}</strong></div>
+        <div class="pr-metric"><span>置信度</span><strong>${Math.round(Number(analysis.confidence || 0) * 100)}%</strong></div>
+      </div>
+      ${(analysis.frameworks_applied || []).length ? `<div class="pr-tags">${analysis.frameworks_applied.map((item) => `<span>${esc(item)}</span>`).join("")}</div>` : ""}
+      ${stakeholders ? `<h3>利益相关方</h3><div class="pr-list">${stakeholders}</div>` : ""}
+      ${analysis.response_posture ? `<h3>建议响应姿态</h3><p class="pr-copy">${esc(analysis.response_posture)}</p>` : ""}
+      ${actions ? `<h3>即时动作</h3><div class="pr-list">${actions}</div>` : ""}
+      <div class="pr-two-col">
+        <div><h3>事实</h3><ul>${(analysis.facts || []).map((item) => `<li>${esc(item.statement)}</li>`).join("") || "<li>暂无</li>"}</ul></div>
+        <div><h3>未证实说法</h3><ul>${(analysis.unverified_claims || []).map((item) => `<li>${esc(item.claim)}</li>`).join("") || "<li>暂无</li>"}</ul></div>
+      </div>
+      <div class="pr-two-col">
+        <div><h3>声誉风险</h3><ul>${(analysis.reputational_risks || []).map((item) => `<li>${esc(item)}</li>`).join("") || "<li>暂无</li>"}</ul></div>
+        <div><h3>沟通原则</h3><ul>${(analysis.message_principles || []).map((item) => `<li>${esc(item)}</li>`).join("") || "<li>暂无</li>"}</ul></div>
+      </div>
+      ${analysis.draft_holding_statement ? `<h3>声明草稿</h3><blockquote class="pr-statement">${esc(analysis.draft_holding_statement)}</blockquote>` : ""}
+      <div class="pr-two-col">
+        <div><h3>避免动作</h3><ul>${(analysis.avoid_actions || []).map((item) => `<li>${esc(item)}</li>`).join("") || "<li>暂无</li>"}</ul></div>
+        <div><h3>证据缺口</h3><ul>${(analysis.evidence_gaps || []).map((item) => `<li>${esc(item)}</li>`).join("") || "<li>暂无</li>"}</ul></div>
+      </div>
+      <h3>后续监测问题</h3><ul>${(analysis.monitoring_questions || []).map((item) => `<li>${esc(item)}</li>`).join("") || "<li>暂无</li>"}</ul>
+      <div class="security-note">公共关系分析由模型辅助生成。声明草稿必须经公关负责人、法务和管理层复核，不构成法律意见或最终决策。</div>
+      <div class="modal-actions"><button class="button button-ghost" type="button" data-pr-refresh>重新生成分析</button></div>
+    </div>
+  `;
+}
+
+async function analyzeEventPr(eventId, force = false) {
+  const area = $("#prAnalysisArea");
+  const button = document.querySelector('[data-pr-analysis]');
+  if (area) area.innerHTML = `<div class="pr-loading"><div class="radar-loader"><span></span></div><p>正在读取证据原文并生成公共关系研判…</p></div>`;
+  if (button) { button.disabled = true; button.textContent = "分析中…"; }
+  try {
+    const result = await api("/api/events/analyze", {method:"POST", body:JSON.stringify({event_id:eventId, force})});
+    if (area) area.innerHTML = renderPrAnalysis(result.analysis?.analysis || {});
+    if (button) { button.disabled = false; button.textContent = "重新生成公共关系研判"; }
+    const refresh = document.querySelector('[data-pr-refresh]');
+    if (refresh) refresh.dataset.prRefresh = eventId;
+  } catch (error) {
+    if (area) area.innerHTML = `<div class="security-note">公共关系分析失败：${esc(error.message)}</div>`;
+    if (button) { button.disabled = false; button.textContent = "生成公共关系研判"; }
+  }
+}
+
 function openDetail(eventId) {
   const event = app.eventMap.get(eventId);
   if (!event) return;
@@ -604,7 +753,10 @@ function openDetail(eventId) {
               <span>${esc(item.author || "未知来源")}</span>
             </div>
             <div class="evidence-actions">
-              <a class="source-link primary-link" href="${safeUrl(item.url)}" target="_blank" rel="noopener noreferrer">查看原始来源 ↗</a>
+              <div class="source-actions">
+                <button class="small-button" type="button" data-read-article="${esc(item.id)}">阅读正文</button>
+                <a class="source-link primary-link" href="${safeUrl(item.url)}" target="_blank" rel="noopener noreferrer">打开原网页 ↗</a>
+              </div>
               <div class="review-actions">
                 <button class="small-button" type="button" data-review="${esc(item.id)}" data-status="reviewing">研判中</button>
                 <button class="small-button" type="button" data-review="${esc(item.id)}" data-status="closed">已处置</button>
@@ -614,6 +766,13 @@ function openDetail(eventId) {
           </article>
         `).join("")}
       </div>
+    </div>
+    <div class="detail-block pr-panel">
+      <div class="side-head">
+        <div><span class="section-kicker">PUBLIC RELATIONS REVIEW</span><h3>公共关系研判</h3></div>
+        <button class="button button-accent" type="button" data-pr-analysis="${esc(event.id)}">生成公共关系研判</button>
+      </div>
+      <div id="prAnalysisArea"><p class="side-copy">按利益相关方、议题生命周期、危机类型、响应姿态和沟通原则生成辅助研判。</p></div>
     </div>
     <div class="modal-actions">
       <a class="button button-ghost" href="/api/reports/event?event_id=${encodeURIComponent(event.id)}" download>导出 Markdown 报告</a>
@@ -760,6 +919,24 @@ function bindEvents() {
       return;
     }
 
+    const readArticle = event.target.closest("[data-read-article]");
+    if (readArticle) {
+      openArticle(readArticle.dataset.readArticle);
+      return;
+    }
+
+    const prButton = event.target.closest("[data-pr-analysis]");
+    if (prButton) {
+      analyzeEventPr(prButton.dataset.prAnalysis, false);
+      return;
+    }
+
+    const prRefresh = event.target.closest("[data-pr-refresh]");
+    if (prRefresh) {
+      analyzeEventPr(prRefresh.dataset.prRefresh, true);
+      return;
+    }
+
     const authButton = event.target.closest("[data-auth-source]");
     if (authButton) {
       openAuth(authButton.dataset.authSource);
@@ -786,11 +963,14 @@ function bindEvents() {
   });
 
   $("#authForm").addEventListener("submit", submitAuth);
+  $("#importArticleButton").addEventListener("click", openImportArticle);
+  $("#importForm").addEventListener("submit", submitImportArticle);
   $("#authType").addEventListener("change", updateAuthFields);
   $("#revokeButton").addEventListener("click", revokeAuth);
   $("#detailClose").addEventListener("click", () => $("#detailModal").close());
+  $("#articleClose").addEventListener("click", () => $("#articleModal").close());
 
-  [$("#authModal"), $("#detailModal")].forEach((dialog) => {
+  [$("#authModal"), $("#importModal"), $("#articleModal"), $("#detailModal")].forEach((dialog) => {
     dialog.addEventListener("click", (event) => {
       if (event.target === dialog) dialog.close();
     });

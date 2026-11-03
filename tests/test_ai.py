@@ -126,6 +126,52 @@ class AIClientTests(unittest.TestCase):
         self.assertTrue(result.ok)
         self.assertEqual(result.results["item-1"]["risk_level"], "medium")
 
+    def test_public_relations_analysis_is_normalized(self):
+        model_output = {
+            "executive_summary": "事件已进入扩散期，需核实事实并准备回应。",
+            "issue_stage": "spreading",
+            "crisis_type": "accidental",
+            "severity": "medium",
+            "frameworks_applied": ["利益相关方分析", "议题生命周期"],
+            "stakeholders": [
+                {"name": "客户", "concern": "服务质量", "impact": "合作关系", "priority": "high"}
+            ],
+            "facts": [{"statement": "出现公开投诉", "evidence_ids": ["E1"]}],
+            "unverified_claims": [{"claim": "存在系统性质量问题", "evidence_ids": ["E1"]}],
+            "reputational_risks": ["信任受损"],
+            "response_posture": "先核实事实，再统一回应",
+            "immediate_actions": [
+                {"timing": "immediate", "action": "建立事实核查表", "reason": "信息仍不完整"}
+            ],
+            "message_principles": ["表达关切", "避免推责"],
+            "draft_holding_statement": "我们已关注到相关反馈并正在核查。",
+            "avoid_actions": ["不要删除评论"],
+            "monitoring_questions": ["是否有新的权威回应？"],
+            "evidence_gaps": ["缺少官方回应"],
+            "confidence": 0.76,
+        }
+        api_payload = {
+            "output": [
+                {
+                    "type": "message",
+                    "content": [
+                        {"type": "output_text", "text": json.dumps(model_output, ensure_ascii=False)}
+                    ],
+                }
+            ]
+        }
+        client = AIClient("http://127.0.0.1:15721/v1", "deepseek-flash", wire_api="responses")
+        with patch("monitor_agent.ai.urllib.request.urlopen", return_value=FakeResponse(api_payload)):
+            result = client.analyze_public_relations(
+                "蓝色光标",
+                {"id": "event:1", "title": "测试事件", "summary": "", "sources": ["weibo_hot"]},
+                [{"evidence_id": "E1", "title": "证据", "text": "测试正文"}],
+            )
+        self.assertTrue(result.ok)
+        self.assertEqual(result.analysis["issue_stage"], "spreading")
+        self.assertEqual(result.analysis["stakeholders"][0]["name"], "客户")
+        self.assertTrue(result.analysis["review_required"])
+
     def test_merge_caps_ai_escalation(self):
         rule = {
             "risk_level": "medium",

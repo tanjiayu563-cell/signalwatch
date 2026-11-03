@@ -45,5 +45,32 @@ class ReportTests(unittest.TestCase):
         self.assertIn("不构成事实认定", report["content"])
 
 
+class ArticleImportTests(unittest.TestCase):
+    def test_manual_article_import_uses_current_watch_terms(self):
+        from unittest.mock import patch
+
+        from monitor_agent.service import MonitorService
+
+        service = MonitorService()
+        article = {
+            "canonical_url": "https://example.com/bluefocus-article",
+            "title": "蓝色光标发布新业务进展",
+            "description": "蓝色光标官方新闻",
+            "site_name": "示例媒体",
+            "published_at": "2026-11-03T10:00:00+08:00",
+            "text": "蓝色光标今天发布了一项新的业务进展，文章正文用于测试。",
+            "char_count": 30,
+        }
+        with patch("monitor_agent.service.read_article", return_value=article), patch(
+            "monitor_agent.service.database.get_watch_terms",
+            return_value=["蓝色光标", "BlueFocus"],
+        ), patch("monitor_agent.service.database.upsert_item") as upsert:
+            result = service.import_article(article["canonical_url"])
+        self.assertEqual(result["item"]["source"], "manual_article")
+        self.assertEqual(result["item"]["title"], "蓝色光标发布新业务进展")
+        self.assertIn("蓝色光标", result["analysis"]["matched_terms"])
+        upsert.assert_called_once()
+
+
 if __name__ == "__main__":
     unittest.main()

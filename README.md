@@ -4,7 +4,7 @@
 
 > 本项目是独立的技术演示与个人研究项目，不代表蓝色光标官方产品，也不存在隶属、合作或授权关系。
 
-一个可直接运行的公开舆情监测与危机预警工作台。当前版本接入了 5 个真实公开来源，完成采集、规范化、去重、关键词命中、风险分级、事件聚合、证据展示和人工处置闭环。
+一个面向蓝色光标专项监测的公开舆情监测与危机预警工作台。默认监测词为“蓝色光标、BlueFocus、蓝标”，支持公开热榜、权威新闻、手动文章导入、正文读取、规则/模型研判和公共关系分析。
 
 ## 当前能做什么
 
@@ -22,6 +22,9 @@
 - 记录完整 Agent 运行轨迹：计划、来源、规则研判、模型调用、告警和失败信息
 - 对新告警去重，并通过通用 Webhook、企业微信、飞书或 SMTP 邮件发送
 - 导出包含证据链、风险依据和覆盖说明的 Markdown 事件报告
+- 在应用内读取原网页正文，并保留原始文章入口
+- 导入新闻、公众号文章、公告或其他公开网页链接
+- 参考利益相关方分析、议题管理、情境危机传播、形象修复等公共关系方法生成事件研判
 - 使用 23 条合成回归集评测规则效果，并支持配置真实模型后对比评测
 - 提供 Docker、Docker Compose、GitHub Actions 和演示脚本
 
@@ -210,6 +213,8 @@ python3 app.py
 | `MONITOR_SCAN_INTERVAL` | `300` | 自动扫描间隔，最少 60 秒 |
 | `MONITOR_HTTP_TIMEOUT` | `15` | 单次网络请求超时 |
 | `MONITOR_ITEMS_PER_SOURCE` | `60` | 每个来源单次最多保留条目 |
+| `MONITOR_COMPANY_NAME` | `蓝色光标` | 专项监测企业名称 |
+| `MONITOR_DEFAULT_WATCH_TERMS` | `蓝色光标,BlueFocus,蓝标` | 首次初始化时的默认监测词 |
 | `MONITOR_DATA_DIR` | `./data` | 数据目录 |
 | `MONITOR_DB_PATH` | `./data/monitor.db` | SQLite 数据库路径 |
 | `MONITOR_CREDENTIAL_PATH` | `./data/credentials.json` | 授权凭据文件路径 |
@@ -250,6 +255,9 @@ MONITOR_PORT=9000 MONITOR_SCAN_INTERVAL=600 python3 app.py
 | `POST` | `/api/reviews` | 标记事件证据的处理状态 |
 | `GET` | `/api/runs/<run_id>` | 获取单次 Agent 运行轨迹 |
 | `GET` | `/api/reports/event?event_id=...` | 下载 Markdown 事件报告 |
+| `GET` | `/api/article?item_id=...` | 提取原始文章正文 |
+| `POST` | `/api/articles/import` | 导入公开文章链接 |
+| `POST` | `/api/events/analyze` | 生成事件级公共关系研判 |
 
 ## 目录结构
 
@@ -292,6 +300,7 @@ data/                        SQLite 和本机授权文件
 - [架构说明](docs/ARCHITECTURE.md)
 - [评测说明](docs/EVALUATION.md)
 - [演示脚本](docs/DEMO.md)
+- [公共关系研判框架](docs/PR_ANALYSIS_FRAMEWORK.md)
 - [简历项目描述](docs/RESUME.md)
 - [评测报告](outputs/evaluation-report.md)
 - [规则与模型对比](outputs/evaluation-comparison.md)

@@ -16,6 +16,13 @@ class AIEnrichmentResult:
     error: str = ""
 
 
+@dataclass
+class AIRelationsResult:
+    ok: bool
+    analysis: Dict[str, Any]
+    error: str = ""
+
+
 class AIClient:
     def __init__(
         self,
@@ -77,6 +84,44 @@ class AIClient:
             "风险判断用于人工预警，不是法律结论。严格返回 JSON 对象，不要输出 Markdown。"
         )
         user_prompt = self._build_prompt(candidates, list(watch_terms))
+        try:
+            parsed = self._complete_json(system_prompt, user_prompt)
+            results = parsed.get("results", [])
+            if not isinstance(results, list):
+                raise ValueError("模型返回缺少 results 数组")
+            mapped: Dict[str, Dict[str, Any]] = {}
+            for result in results:
+                if not isinstance(result, dict) or not result.get("id"):
+                    continue
+                mapped[str(result["id"])] = self._normalize_result(result)
+            return AIEnrichmentResult(True, mapped)
+        except (urllib.error.URLError, TimeoutError, ValueError, KeyError, json.JSONDecodeError) as exc:
+            return AIEnrichmentResult(False, {}, f"{type(exc).__name__}: {exc}"[:500])
+
+    def analyze_public_relations(
+        self,
+        company: str,
+        event: Dict[str, Any],
+        evidence: List[Dict[str, Any]],
+    ) -> AIRelationsResult:
+        if not self.enabled:
+            return AIRelationsResult(False, {}, "AI 模型未配置")
+        system_prompt = (
+            "你是企业公共关系与危机传播分析助手。你只能依据提供的证据研判，"
+            "不得虚构事实、来源、引文或书籍原文。请综合使用利益相关方分析、议题生命周期、"
+            "情境危机传播、形象修复和双向对称沟通等通用公共关系方法，但不要声称逐字引用书籍。"
+            "结论是辅助建议，不替代法务、管理层或公关负责人决策。严格返回 JSON 对象，不要输出 Markdown。"
+        )
+        user_prompt = self._build_relations_prompt(company, event, evidence)
+        try:
+            parsed = self._complete_json(system_prompt, user_prompt)
+            return AIRelationsResult(True, self._normalize_relations_analysis(parsed))
+        except (urllib.error.URLError, TimeoutError, ValueError, KeyError, json.JSONDecodeError) as exc:
+            return AIRelationsResult(False, {}, f"{type(exc).__name__}: {exc}"[:500])
+
+    def _complete_json(self, system_prompt: str, user_prompt: str) -> Dict[str, Any]:
+        if not self.enabled:
+            raise ValueError("AI 模型未配置")
         if self.wire_api == "responses":
             payload = {
                 "model": self.model,
@@ -111,27 +156,15 @@ class AIClient:
             headers=headers,
             method="POST",
         )
-        try:
-            with urllib.request.urlopen(request, timeout=self.timeout) as response:
-                body = response.read().decode("utf-8")
-            data = json.loads(body)
-            content = (
-                self._extract_responses_content(data)
-                if self.wire_api == "responses"
-                else self._extract_content(data)
-            )
-            parsed = self._parse_json_content(content)
-            results = parsed.get("results", [])
-            if not isinstance(results, list):
-                raise ValueError("模型返回缺少 results 数组")
-            mapped: Dict[str, Dict[str, Any]] = {}
-            for result in results:
-                if not isinstance(result, dict) or not result.get("id"):
-                    continue
-                mapped[str(result["id"])] = self._normalize_result(result)
-            return AIEnrichmentResult(True, mapped)
-        except (urllib.error.URLError, TimeoutError, ValueError, KeyError, json.JSONDecodeError) as exc:
-            return AIEnrichmentResult(False, {}, f"{type(exc).__name__}: {exc}"[:500])
+        with urllib.request.urlopen(request, timeout=self.timeout) as response:
+            body = response.read().decode("utf-8")
+        data = json.loads(body)
+        content = (
+            self._extract_responses_content(data)
+            if self.wire_api == "responses"
+            else self._extract_content(data)
+        )
+        return self._parse_json_content(content)
 
     def _build_prompt(self, items: List[Dict[str, Any]], watch_terms: List[str]) -> str:
         evidence = []
@@ -159,6 +192,131 @@ class AIClient:
             '"verification_questions":["最多3个需要人工核查的问题"],'
             '"confidence":0.0}]}'
         )
+
+    def _build_relations_prompt(
+        self,
+        company: str,
+        event: Dict[str, Any],
+        evidence: List[Dict[str, Any]],
+    ) -> str:
+        compact_evidence = []
+        for index, item in enumerate(evidence[:5], start=1):
+            compact_evidence.append(
+                {
+                    "evidence_id": item.get("evidence_id") or item.get("id") or f"E{index}",
+                    "source": item.get("source", ""),
+                    "title": str(item.get("title", ""))[:240],
+                    "url": item.get("url", ""),
+                    "published_at": item.get("published_at"),
+                    "excerpt": str(item.get("text") or item.get("summary") or "")[:4000],
+                    "content_error": item.get("content_error", ""),
+                }
+            )
+        event_payload = {
+            "company": company,
+            "title": event.get("title", ""),
+            "summary": event.get("summary", ""),
+            "risk_level": event.get("risk_level", ""),
+            "risk_reasons": event.get("risk_reasons", []),
+            "sources": event.get("sources", []),
+            "first_seen": event.get("first_seen"),
+            "last_seen": event.get("last_seen"),
+            "evidence": compact_evidence,
+        }
+        return (
+            "请对下面的企业舆情事件做公共关系研判。事实、来源声称和模型推断必须分开。\n"
+            "分析要求：\n"
+            "1. 使用议题生命周期判断事件阶段。\n"
+            "2. 使用利益相关方分析识别核心关切、影响和优先级。\n"
+            "3. 使用情境危机传播思路判断危机类型，但必须说明证据限制。\n"
+            "4. 给出审慎的响应姿态、即时动作、沟通原则和声明草稿。\n"
+            "5. 明确列出不能说的话、未证实说法和仍需核查的证据。\n"
+            "6. 不提出删帖、压制传播、水军、煽动情绪或误导公众的建议。\n"
+            "7. 草稿必须标记为待人工和法务复核。\n\n"
+            f"事件材料：{json.dumps(event_payload, ensure_ascii=False)}\n\n"
+            "严格返回以下 JSON 结构：\n"
+            '{"executive_summary":"不超过180字",'
+            '"issue_stage":"latent|emerging|outbreak|spreading|receding|unknown",'
+            '"crisis_type":"victim|accidental|preventable|not_crisis|unknown",'
+            '"severity":"low|medium|high",'
+            '"frameworks_applied":["最多4项"],'
+            '"stakeholders":[{"name":"","concern":"","impact":"","priority":"high|medium|low"}],'
+            '"facts":[{"statement":"","evidence_ids":["E1"]}],'
+            '"unverified_claims":[{"claim":"","evidence_ids":["E1"]}],'
+            '"reputational_risks":["最多5项"],'
+            '"response_posture":"一句话说明建议姿态及边界",'
+            '"immediate_actions":[{"timing":"immediate|24h|ongoing","action":"","reason":""}],'
+            '"message_principles":["最多5项"],'
+            '"draft_holding_statement":"待人工和法务复核的简短声明草稿",'
+            '"avoid_actions":["最多5项"],'
+            '"monitoring_questions":["最多5项"],'
+            '"evidence_gaps":["最多5项"],'
+            '"confidence":0.0}'
+        )
+
+    def _normalize_relations_analysis(self, result: Dict[str, Any]) -> Dict[str, Any]:
+        def string_list(value: Any, limit: int = 5) -> List[str]:
+            if not isinstance(value, list):
+                return []
+            return [str(item).strip()[:500] for item in value if str(item).strip()][:limit]
+
+        def object_list(value: Any, keys: List[str], limit: int = 8) -> List[Dict[str, Any]]:
+            if not isinstance(value, list):
+                return []
+            output = []
+            for item in value[:limit]:
+                if not isinstance(item, dict):
+                    continue
+                normalized = {}
+                for key in keys:
+                    raw = item.get(key)
+                    if isinstance(raw, list):
+                        normalized[key] = [str(entry).strip()[:200] for entry in raw if str(entry).strip()][:8]
+                    else:
+                        normalized[key] = str(raw or "").strip()[:800]
+                if any(normalized.values()):
+                    output.append(normalized)
+            return output
+
+        issue_stage = str(result.get("issue_stage", "unknown")).lower()
+        if issue_stage not in {"latent", "emerging", "outbreak", "spreading", "receding", "unknown"}:
+            issue_stage = "unknown"
+        crisis_type = str(result.get("crisis_type", "unknown")).lower()
+        if crisis_type not in {"victim", "accidental", "preventable", "not_crisis", "unknown"}:
+            crisis_type = "unknown"
+        severity = str(result.get("severity", "medium")).lower()
+        if severity not in {"low", "medium", "high"}:
+            severity = "medium"
+        try:
+            confidence = float(result.get("confidence", 0))
+        except (TypeError, ValueError):
+            confidence = 0.0
+        return {
+            "executive_summary": str(result.get("executive_summary", "")).strip()[:1000],
+            "issue_stage": issue_stage,
+            "crisis_type": crisis_type,
+            "severity": severity,
+            "frameworks_applied": string_list(result.get("frameworks_applied"), 4),
+            "stakeholders": object_list(
+                result.get("stakeholders"), ["name", "concern", "impact", "priority"]
+            ),
+            "facts": object_list(result.get("facts"), ["statement", "evidence_ids"]),
+            "unverified_claims": object_list(
+                result.get("unverified_claims"), ["claim", "evidence_ids"]
+            ),
+            "reputational_risks": string_list(result.get("reputational_risks"), 5),
+            "response_posture": str(result.get("response_posture", "")).strip()[:1000],
+            "immediate_actions": object_list(
+                result.get("immediate_actions"), ["timing", "action", "reason"]
+            ),
+            "message_principles": string_list(result.get("message_principles"), 5),
+            "draft_holding_statement": str(result.get("draft_holding_statement", "")).strip()[:2000],
+            "avoid_actions": string_list(result.get("avoid_actions"), 5),
+            "monitoring_questions": string_list(result.get("monitoring_questions"), 5),
+            "evidence_gaps": string_list(result.get("evidence_gaps"), 5),
+            "confidence": max(0.0, min(1.0, confidence)),
+            "review_required": True,
+        }
 
     def _extract_responses_content(self, data: Dict[str, Any]) -> str:
         output_text = data.get("output_text")

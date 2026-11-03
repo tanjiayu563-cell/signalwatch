@@ -38,6 +38,10 @@ PORT = int(os.getenv("MONITOR_PORT", "8765"))
 SCAN_INTERVAL_SECONDS = max(60, int(os.getenv("MONITOR_SCAN_INTERVAL", "300")))
 HTTP_TIMEOUT_SECONDS = max(5, int(os.getenv("MONITOR_HTTP_TIMEOUT", "15")))
 MAX_ITEMS_PER_SOURCE = max(10, int(os.getenv("MONITOR_ITEMS_PER_SOURCE", "60")))
+COMPANY_NAME = os.getenv("MONITOR_COMPANY_NAME", "蓝色光标").strip() or "蓝色光标"
+DEFAULT_WATCH_TERMS = os.getenv(
+    "MONITOR_DEFAULT_WATCH_TERMS", "蓝色光标,BlueFocus,蓝标"
+).strip()
 USER_AGENT = os.getenv(
     "MONITOR_USER_AGENT",
     "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) "

@@ -35,6 +35,17 @@ class DatabaseRunTests(unittest.TestCase):
         self.assertEqual(run["metrics"]["items_fetched"], 2)
         self.assertEqual(run["steps"][0]["name"], "plan")
 
+    def test_event_analysis_cache(self):
+        database.save_event_analysis(
+            "event:test",
+            "deepseek-flash",
+            {"executive_summary": "测试研判"},
+            [{"evidence_id": "E1", "title": "证据"}],
+        )
+        cached = database.get_event_analysis("event:test")
+        self.assertEqual(cached["model"], "deepseek-flash")
+        self.assertEqual(cached["analysis"]["executive_summary"], "测试研判")
+
     def test_alert_candidates_are_deduplicated(self):
         item = {
             "id": "weibo_hot:1",

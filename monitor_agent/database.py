@@ -101,6 +101,15 @@ def init_db() -> None:
             CREATE INDEX IF NOT EXISTS idx_agent_runs_started
                 ON agent_runs(started_at DESC);
 
+            CREATE TABLE IF NOT EXISTS event_analyses (
+                event_id TEXT PRIMARY KEY,
+                model TEXT NOT NULL DEFAULT '',
+                analysis_json TEXT NOT NULL DEFAULT '{}',
+                evidence_json TEXT NOT NULL DEFAULT '[]',
+                created_at TEXT NOT NULL,
+                updated_at TEXT NOT NULL
+            );
+
             CREATE TABLE IF NOT EXISTS alert_deliveries (
                 item_id TEXT PRIMARY KEY,
                 run_id TEXT NOT NULL,
@@ -514,3 +523,60 @@ def recent_alerts(limit: int = 50) -> List[Dict[str, Any]]:
         item["payload"] = json.loads(item.pop("payload_json") or "{}")
         result.append(item)
     return result
+
+
+def get_item(item_id: str) -> Optional[Dict[str, Any]]:
+    with connect() as conn:
+        row = conn.execute(
+            "SELECT * FROM items WHERE id = ?",
+            (item_id,),
+        ).fetchone()
+    if not row:
+        return None
+    item = dict(row)
+    item["raw"] = json.loads(item.pop("raw_json") or "{}")
+    return item
+
+
+def get_event_analysis(event_id: str) -> Optional[Dict[str, Any]]:
+    with connect() as conn:
+        row = conn.execute(
+            "SELECT * FROM event_analyses WHERE event_id = ?",
+            (event_id,),
+        ).fetchone()
+    if not row:
+        return None
+    result = dict(row)
+    result["analysis"] = json.loads(result.pop("analysis_json") or "{}")
+    result["evidence"] = json.loads(result.pop("evidence_json") or "[]")
+    return result
+
+
+def save_event_analysis(
+    event_id: str,
+    model: str,
+    analysis: Dict[str, Any],
+    evidence: List[Dict[str, Any]],
+) -> None:
+    now = utc_now()
+    with connect() as conn:
+        conn.execute(
+            """
+            INSERT INTO event_analyses(
+                event_id, model, analysis_json, evidence_json, created_at, updated_at
+            ) VALUES (?, ?, ?, ?, ?, ?)
+            ON CONFLICT(event_id) DO UPDATE SET
+                model = excluded.model,
+                analysis_json = excluded.analysis_json,
+                evidence_json = excluded.evidence_json,
+                updated_at = excluded.updated_at
+            """,
+            (
+                event_id,
+                model,
+                json.dumps(analysis, ensure_ascii=False),
+                json.dumps(evidence, ensure_ascii=False),
+                now,
+                now,
+            ),
+        )
